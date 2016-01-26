@@ -1,0 +1,50 @@
+ATENCAO:
+- Requer Laravel 5.2 (PATH)
+- Requer PHP >= 5.5.9 (PATH)
+- Requer Composer (PATH)
+- Requer MySQL
+- Sugestao para teste: Postman
+
+PARA INSTALAR O PROJETO:
+
+1) Instale as dependencias. Na pasta do projeto:
+	> composer install
+
+	Nota: se der erro, experimente primeiro apagar o arquivo composer.lock.
+
+2) Crie o arquivo .env a partir do arquivo .env.example e, em seguida, defina o nome da base de dados, usuario e senha. Exemplo:
+	DB_DATABASE=codeproject_curso_entrega
+	DB_USERNAME=root
+	DB_PASSWORD=
+
+3) Gere a chave para sua aplicacao. Na pasta do projeto (observe depois no arquivo .env):
+	> php artisan key:generate
+
+4) No gerenciador de banco de dados, crie uma base de dados com o nome que voce definiu anteriormente.
+	create database codeproject_curso_entrega;
+
+5) Gere a base de dados. Na pasta do projeto:
+	> composer dump-autoload
+	> php artisan migrate:refresh --seed
+
+6) Suba o backend. Na pasta do projeto:
+	> php artisan serve
+
+7) No Postman, obtenha um token de autenticacao: 
+
+	Metodo POST: http://localhost:8000/oauth/access_token
+
+	Body form-data:
+		username: fulano@gmail.com
+		password: 123456
+		client_id: appid1
+		client_secret: secret
+		grant_type: password
+
+8) No Postman, teste uma requisicao autenticada:
+
+	Metodo GET: http://localhost:8000/client
+
+	Headers:
+		Authorization: Bearer <token obtido no passo anterior>
+
