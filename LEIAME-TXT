@@ -2,12 +2,15 @@ ATENCAO:
 - Requer Laravel 5.2 (PATH)
 - Requer PHP >= 5.5.9 (PATH)
 - Requer Composer (PATH)
+- Requer NPM do NodeJS.org (PATH)
+- Requer Bower (PATH)
+- Requer Gulp (PATH)
 - Requer MySQL
 - Sugestao para teste: Postman
 
-PARA INSTALAR O PROJETO:
+PARA INSTALAR O PROJETO (PARTE 1 - BACKEND):
 
-1) Instale as dependencias. Na pasta do projeto:
+1) Instale as dependencias relacionadas ao composer. Na pasta do projeto:
 	> composer install
 
 	Nota: se der erro, experimente primeiro apagar o arquivo composer.lock.
@@ -47,4 +50,29 @@ PARA INSTALAR O PROJETO:
 
 	Headers:
 		Authorization: Bearer <token obtido no passo anterior>
+
+
+PARA INSTALAR O PROJETO (PARTE 2 - FRONTEND):
+
+1) Instale as dependências relacionadas ao NPM (e va tomar um cafe):
+> npm install -f
+
+2) Instale as dependências relacionadas ao Bower
+> bower install
+
+3) Teste o modo dev:
+	3.1) No arquivo .env, defina APP_DEBUG=true
+	3.2) Em um terminal, rode: > gulp watch-dev
+	3.3) Em outro terminal rode: > php artisan serve
+	3.4) No navegador acesse: localhost:8000
+	3.5) Observe os arquivos carregados em Ferramentas de Desenvolvedor
+
+4) Teste o modo producao:
+	4.1) No arquivo .env, defina APP_DEBUG=false
+	4.2) Em um terminal, rode: > gulp
+	4.3) Em outro terminal rode: > php artisan serve
+	4.4) No navegador acesse: localhost:8000
+	4.5) Observe os arquivos carregados em Ferramentas de Desenvolvedor
+
+
 
