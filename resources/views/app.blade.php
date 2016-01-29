@@ -84,6 +84,8 @@
 		<script src="{{ asset('build/js/controllers/login.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/client/clientList.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/client/clientNew.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/controllers/client/clientEdit.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/controllers/client/clientRemove.js') }}" type="text/javascript"></script>
 
 		<!-- SERVICES -->
 		<script src="{{ asset('build/js/services/client.js') }}" type="text/javascript"></script>
