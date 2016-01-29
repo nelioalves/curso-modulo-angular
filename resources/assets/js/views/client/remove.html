@@ -5,7 +5,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Exclusão de cliente</div>
 				<div class="panel-body">
-					<ul>
+					<ul ng-init="get()">
 						<li><strong>Name:</strong>{{client.name}}</li>
 						<li><strong>E-mail:</strong>{{client.email}}</li>
 						<li><strong>Phone:</strong>{{client.phone}}</li>

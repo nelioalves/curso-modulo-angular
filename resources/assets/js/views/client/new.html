@@ -6,7 +6,7 @@
 				<div class="panel-heading">Cadastro de cliente</div>
 				<div class="panel-body">
 
-					<form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()">
+					<form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()" ng-init="new()">
 						<div class="form-group" ng-class="{'has-error': !form.name.$valid && form.name.$touched}">
 							<label class="col-md-4 control-label">Name</label>
 							<div class="col-md-6">

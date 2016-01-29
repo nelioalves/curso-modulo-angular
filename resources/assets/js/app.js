@@ -32,19 +32,19 @@ app.config([
       })
       .when('/clients', {
           templateUrl: 'build/views/client/list.html',
-          controller: 'ClientListController'
+          controller: 'ClientController'
       })
       .when('/clients/new', {
           templateUrl: 'build/views/client/new.html',
-          controller: 'ClientNewController'
+          controller: 'ClientController'
       })
       .when('/clients/:id/edit', {
           templateUrl: 'build/views/client/edit.html',
-          controller: 'ClientEditController'
+          controller: 'ClientController'
       })
       .when('/clients/:id/remove', {
           templateUrl: 'build/views/client/remove.html',
-          controller: 'ClientRemoveController'
+          controller: 'ClientController'
       })
     ;
 
