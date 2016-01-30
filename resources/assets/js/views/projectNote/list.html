@@ -5,31 +5,27 @@
 				<div class="panel-heading">Listagem</div>
 				<div class="panel-body">
 
-					<a ng-href="#/clients/new" class="btn btn-primary">Inserir novo</a>
+					<a ng-href="#/project/{{project_id}}/notes/new" class="btn btn-primary">Inserir novo</a>
 
 					<table class="table" ng-init="all()">
 						<thead>
 						<tr>
 							<th>Id</th>
-							<th>Name</th>
-							<th>Responsible</th>
-							<th>Email</th>
-							<th>Phone</th>
+							<th>Title</th>
+							<th>Content</th>
 							<th>Ação</th>
 						</tr>
 						</thead>
 						<tbody>
 						<tr ng-repeat="o in items">
 							<td>
-								<a ng-href="#/clients/{{o.id}}">{{o.id}}</a>
+								<a ng-href="#/project/{{o.project_id}}/notes/{{o.id}}">{{o.id}}</a>
 							</td>
-							<td>{{o.name}}</td>
-							<td>{{o.responsible}}</td>
-							<td>{{o.email}}</td>
-							<td>{{o.phone}}</td>
+							<td>{{o.title}}</td>
+							<td>{{o.content}}</td>
 							<td>
-								<a ng-href="#/clients/{{o.id}}/edit">Editar</a> |
-								<a ng-href="#/clients/{{o.id}}/remove">Excluir</a>
+								<a ng-href="#/project/{{o.project_id}}/notes/{{o.id}}/edit">Editar</a> |
+								<a ng-href="#/project/{{o.project_id}}/notes/{{o.id}}/remove">Excluir</a>
 							</td>
 						</tr>
 						</tbody>

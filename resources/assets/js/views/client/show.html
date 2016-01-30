@@ -3,21 +3,17 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Exclusão</div>
+				<div class="panel-heading">Detalhes</div>
 				<div class="panel-body">
 					<ul ng-init="get()">
+						<li><strong>Id:</strong>{{item.id}}</li>
 						<li><strong>Name:</strong>{{item.name}}</li>
 						<li><strong>E-mail:</strong>{{item.email}}</li>
 						<li><strong>Phone:</strong>{{item.phone}}</li>
+						<li><strong>Responsible:</strong>{{item.responsible}}</li>
+						<li><strong>Address:</strong>{{item.address}}</li>
+						<li><strong>Obs:</strong>{{item.obs}}</li>
 					</ul>
-
-					<div class="form-group">
-						<div class="col-md-6 col-md-offset-4">
-							<button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
-
-							<button type="button" class="btn btn-danger" ng-click="remove()">Excluir</button>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

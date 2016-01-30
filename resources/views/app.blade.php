@@ -66,6 +66,8 @@
 	<!-- Scripts -->
 	@if(Config::get('app.debug'))
 		<script src="{{ asset('build/js/vendor/jquery.min.js') }}" type="text/javascript"></script>
+		<script>var $jQuery = jQuery.noConflict();</script>
+
 		<script src="{{ asset('build/js/vendor/angular.min.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/vendor/angular-route.min.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/vendor/angular-resource.min.js') }}" type="text/javascript"></script>
@@ -83,9 +85,11 @@
 		<script src="{{ asset('build/js/controllers/home.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/login.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/clientController.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/controllers/projectNoteController.js') }}" type="text/javascript"></script>
 
 		<!-- SERVICES -->
 		<script src="{{ asset('build/js/services/client.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/services/projectNote.js') }}" type="text/javascript"></script>
 	@else
 		<script src="{{ elixir('js/all.js') }}" type="text/javascript"></script>
 	@endif

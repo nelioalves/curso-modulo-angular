@@ -21,14 +21,19 @@ app.provider('appConfig', function() {
 app.config([
   '$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
   function($routeProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider) {
+
     $routeProvider
-      .when('/login', {
-          templateUrl: 'build/views/login.html',
-          controller: 'LoginController'
+      .when('/', {
+          templateUrl: 'build/views/home.html',
+          controller: 'HomeController'
       })
       .when('/home', {
           templateUrl: 'build/views/home.html',
           controller: 'HomeController'
+      })
+      .when('/login', {
+          templateUrl: 'build/views/login.html',
+          controller: 'LoginController'
       })
       .when('/clients', {
           templateUrl: 'build/views/client/list.html',
@@ -45,6 +50,30 @@ app.config([
       .when('/clients/:id/remove', {
           templateUrl: 'build/views/client/remove.html',
           controller: 'ClientController'
+      })
+      .when('/clients/:id', {
+          templateUrl: 'build/views/client/show.html',
+          controller: 'ClientController'
+      })
+      .when('/project/:id/notes', {
+          templateUrl: 'build/views/projectNote/list.html',
+          controller: 'ProjectNoteController'
+      })
+      .when('/project/:id/notes/new', {
+          templateUrl: 'build/views/projectNote/new.html',
+          controller: 'ProjectNoteController'
+      })
+      .when('/project/:id/notes/:idNote/edit', {
+          templateUrl: 'build/views/projectNote/edit.html',
+          controller: 'ProjectNoteController'
+      })
+      .when('/project/:id/notes/:idNote/remove', {
+          templateUrl: 'build/views/projectNote/remove.html',
+          controller: 'ProjectNoteController'
+      })
+      .when('/project/:id/notes/:idNote', {
+          templateUrl: 'build/views/projectNote/show.html',
+          controller: 'ProjectNoteController'
       })
     ;
 
@@ -65,7 +94,7 @@ app.config([
   }
 ]);
 
-app.run(['$rootScope', '$window', 'OAuth', function($rootScope, $window, OAuth) {
+app.run(['$rootScope', '$window', 'OAuth', '$location', function($rootScope, $window, OAuth, $location) {
     $rootScope.$on('oauth:error', function(event, rejection) {
       // Ignore `invalid_grant` error - should be catched on `LoginController`.
       if ('invalid_grant' === rejection.data.error) {
@@ -78,7 +107,8 @@ app.run(['$rootScope', '$window', 'OAuth', function($rootScope, $window, OAuth) 
       }
 
       // Redirect to `/login` with the `error_reason`.
-      return $window.location.href = '/login?error_reason=' + rejection.data.error;
+      $location.path('/login');
+      //return $window.location.href = '/login?error_reason=' + rejection.data.error;
     });
 }]);
 
