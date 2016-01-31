@@ -27,7 +27,7 @@ angular.module('app.controllers')
                     checkServiceError(value[0]);
 				},
 				function(httpResponse) {
-					alert("Ocorreu um erro. Veja no console.");
+					alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
 					console.log(httpResponse);
 				}
 		    );
@@ -40,7 +40,7 @@ angular.module('app.controllers')
                     checkServiceError(value);
 				},
 				function(httpResponse) {
-					alert("Ocorreu um erro. Veja no console.");
+					alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
 					console.log(httpResponse);
 				}
 			);
@@ -55,7 +55,7 @@ angular.module('app.controllers')
 					}
 				},
 				function(httpResponse) {
-					alert("Ocorreu um erro. Veja no console.");
+					alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
 					console.log(httpResponse);
 				}
 			);
@@ -71,7 +71,7 @@ angular.module('app.controllers')
 					}
 				},
 				function(httpResponse) {
-					alert("Ocorreu um erro. Veja no console.");
+					alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
 					console.log(httpResponse);
 				}
 			);
@@ -86,7 +86,7 @@ angular.module('app.controllers')
 					}
 				},
 				function(httpResponse) {
-					alert("Ocorreu um erro. Veja no console.");
+					alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
 					console.log(httpResponse);
 				}
 			);

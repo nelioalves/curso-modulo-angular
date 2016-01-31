@@ -11,11 +11,18 @@ angular.module('app.services')
 				method: 'GET',
 				isArray: true,
 				transformResponse: function(data, headers) {
-					var dataJson = JSON.parse(data);
-					if (dataJson.hasOwnProperty('error') && dataJson.error == true) {
-						return [dataJson];
-					}
-					return dataJson;
+					var headersGetter = headers();
+				    if (headersGetter['content-type']=='application/json' || headersGetter['content-type']=='application/json') {
+				    	var dataJson = JSON.parse(data);
+				        if (dataJson.hasOwnProperty('data')) {
+				          dataJson = dataJson.data;
+				        }
+				        if (dataJson.hasOwnProperty('error') && dataJson.error == true) {
+							return [dataJson];
+						}
+				        return dataJson;
+				      }
+				    return data;
 				}
 			}
 		}

@@ -7,15 +7,6 @@
 				<div class="panel-body">
 
 					<form class="form-horizontal" name="form" role="form" method="POST" ng-submit="update()" ng-init="get()">
-						<div class="form-group" ng-class="{'has-error': !form.name.$valid && form.name.$touched}">
-							<label class="col-md-4 control-label">Project Id</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" ng-model="item.project_id" required readonly>
-								<div ng-messages="form.name.$error" class="help-block" ng-show="form.name.$touched">
-									<div ng-message="required">Campo obrigatório</div>
-								</div>
-							</div>
-						</div>
 
 						<div class="form-group" ng-class="{'has-error': !form.responsible.$valid && form.responsible.$touched}">
 							<label class="col-md-4 control-label">Title</label>

@@ -19,8 +19,20 @@ app.provider('appConfig', function() {
 // config so aceita provider, portanto criamos um provider acima (ATENCAO AO PADRAO DE 
   //NOMES: o provider chama 'appConfig' e aqui ele eh referenciado como 'appConfigProvider')
 app.config([
-  '$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
-  function($routeProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider) {
+  '$routeProvider', '$httpProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
+  function($routeProvider, $httpProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider) {
+
+    $httpProvider.defaults.transformResponse = function(data, headers) {
+      var headersGetter = headers();
+      if (headersGetter['content-type']=='application/json' || headersGetter['content-type']=='application/json') {
+        var dataJson = JSON.parse(data);
+        if (dataJson.hasOwnProperty('data')) {
+          dataJson = dataJson.data;
+        }
+        return dataJson;
+      }
+      return data;
+    };
 
     $routeProvider
       .when('/', {
@@ -107,8 +119,9 @@ app.run(['$rootScope', '$window', 'OAuth', '$location', function($rootScope, $wi
       }
 
       // Redirect to `/login` with the `error_reason`.
-      $location.path('/login');
-      //return $window.location.href = '/login?error_reason=' + rejection.data.error;
+      //$location.path('/login');
+      //return $window.location.href = '/login';
+      return $window.location.href = '/login?error_reason=' + rejection.data.error;
     });
 }]);
 

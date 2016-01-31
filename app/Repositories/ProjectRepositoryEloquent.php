@@ -63,9 +63,9 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
         return null;
     }
 
-//    public function presenter() {
-//        return \CodeProject\Presenters\ProjectPresenter::class;
-//    }
+    public function presenter() {
+        return \CodeProject\Presenters\ProjectPresenter::class;
+    }
 }
 
 

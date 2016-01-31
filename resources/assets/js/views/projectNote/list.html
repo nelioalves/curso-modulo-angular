@@ -19,13 +19,13 @@
 						<tbody>
 						<tr ng-repeat="o in items">
 							<td>
-								<a ng-href="#/project/{{o.project_id}}/notes/{{o.id}}">{{o.id}}</a>
+								<a ng-href="#/project/{{project_id}}/notes/{{o.id}}">{{o.id}}</a>
 							</td>
 							<td>{{o.title}}</td>
-							<td>{{o.content}}</td>
+							<td>{{o.content | limitTo:25}}...</td>
 							<td>
-								<a ng-href="#/project/{{o.project_id}}/notes/{{o.id}}/edit">Editar</a> |
-								<a ng-href="#/project/{{o.project_id}}/notes/{{o.id}}/remove">Excluir</a>
+								<a ng-href="#/project/{{project_id}}/notes/{{o.id}}/edit">Editar</a> |
+								<a ng-href="#/project/{{project_id}}/notes/{{o.id}}/remove">Excluir</a>
 							</td>
 						</tr>
 						</tbody>

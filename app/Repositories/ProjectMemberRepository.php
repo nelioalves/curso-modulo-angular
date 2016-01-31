@@ -14,5 +14,4 @@ interface ProjectMemberRepository extends RepositoryInterface
     // ProjectMemberRepository dentro de ProjectRepository
     public function projectsOfWhichIsMember($user_id);
 
-    public function presenter();
 }
