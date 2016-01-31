@@ -90,6 +90,8 @@ Route::group(['middleware'=>'oauth'], function() {
 		Route::put('project/{project}', 'ProjectController@update');
 	});
 
+	Route::get('user/authenticated', 'UserController@authenticated');
+
 });
 
 
