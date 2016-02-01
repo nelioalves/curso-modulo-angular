@@ -1,11 +1,21 @@
-var app = angular.module('app', ['ngRoute', 'angular-oauth2', 'app.controllers', 'app.services']);
+var app = angular.module('app', [
+  'ngRoute', 'angular-oauth2', 'app.controllers', 'app.services', 'app.filters',
+]);
 
 angular.module('app.controllers', ['ngMessages','angular-oauth2']);
+angular.module('app.filters', []);
 angular.module('app.services', ['ngResource']);
 
 app.provider('appConfig', function() {
   var config = {
-    baseUrl: 'http://localhost:8000'
+    baseUrl: 'http://localhost:8000',
+    project: {
+      status: [
+        {key: 1, value: 'Não iniciado'},
+        {key: 2, value: 'Iniciado'},
+        {key: 3, value: 'Concluído'}
+      ] 
+    }
   };
 
   return {
@@ -21,6 +31,11 @@ app.provider('appConfig', function() {
 app.config([
   '$routeProvider', '$httpProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
   function($routeProvider, $httpProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider) {
+
+    // Por causa da adaptacao de datas que fizemos, precisamos configurar a aplicacao para aceitar
+    // os dados do post e put na forma de urlencoded
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    $httpProvider.defaults.headers.put['Content-Type']  = 'application/x-www-form-urlencoded;charset=utf-8';
 
     $httpProvider.defaults.transformResponse = function(data, headers) {
       var headersGetter = headers();
@@ -66,6 +81,22 @@ app.config([
       .when('/clients/:id', {
           templateUrl: 'build/views/client/show.html',
           controller: 'ClientController'
+      })
+      .when('/projects', {
+          templateUrl: 'build/views/project/list.html',
+          controller: 'ProjectController'
+      })
+      .when('/projects/new', {
+          templateUrl: 'build/views/project/new.html',
+          controller: 'ProjectController'
+      })
+      .when('/projects/:id/edit', {
+          templateUrl: 'build/views/project/edit.html',
+          controller: 'ProjectController'
+      })
+      .when('/projects/:id/remove', {
+          templateUrl: 'build/views/project/remove.html',
+          controller: 'ProjectController'
       })
       .when('/project/:id/notes', {
           templateUrl: 'build/views/projectNote/list.html',

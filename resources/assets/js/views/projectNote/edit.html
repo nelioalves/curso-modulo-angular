@@ -21,7 +21,7 @@
 						<div class="form-group" ng-class="{'has-error': !form.phone.$valid && form.phone.$touched}">
 							<label class="col-md-4 control-label">Content</label>
 							<div class="col-md-6">
-								<textarea name="content" ng-model="item.content" name="content" required></textarea>
+								<textarea  class="form-control" name="content" ng-model="item.content" name="content" required></textarea>
 								<div ng-messages="form.phone.$error" class="help-block" ng-show="form.phone.$touched">
 									<div ng-message="required">Campo obrigatório</div>
 								</div>

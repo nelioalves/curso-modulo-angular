@@ -53,7 +53,7 @@ class Project extends Model implements Transformable
         return $this->belongsToMany(User::class, 'project_members', 'project_id', 'user_id');
     }
 
-    public function setDueDateAttribute($date) {
-        $this->attributes['due_date'] = DateTime::createFromFormat('d/m/Y', $date); 
-    }
+//    public function setDueDateAttribute($date) {
+//        $this->attributes['due_date'] = DateTime::createFromFormat('d/m/Y', $date); 
+//    }
 }

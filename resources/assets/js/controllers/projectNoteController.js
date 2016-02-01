@@ -5,15 +5,6 @@ angular.module('app.controllers')
 
 		$scope.project_id = $routeParams.id; // ATENCAO
 
-		var checkServiceError = function(obj) {
-			if (obj.hasOwnProperty('error') && obj.error==true) {
-            	alert(obj.message);
-            	history.back();
-            	return true;
-			}			
-			return false;
-		}
-
 		$scope.cancel = function() {
 			$location.path('/project/'+$scope.item.project_id+'/notes'); // ATENCAO
 		}

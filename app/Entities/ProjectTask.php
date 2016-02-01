@@ -27,12 +27,12 @@ class ProjectTask extends Model implements Transformable
         return $this->belongsTo(Project::class);
     }
 
-    public function setStartDateAttribute($date) {
-        $this->attributes['start_date'] = DateTime::createFromFormat('d/m/Y', $date); 
-    }
+//    public function setStartDateAttribute($date) {
+//       $this->attributes['start_date'] = DateTime::createFromFormat('d/m/Y', $date); 
+//    }
 
-    public function setDueDateAttribute($date) {
-        $this->attributes['due_date'] = DateTime::createFromFormat('d/m/Y', $date); 
-    }
+//    public function setDueDateAttribute($date) {
+//        $this->attributes['due_date'] = DateTime::createFromFormat('d/m/Y', $date); 
+//    }
 
 }

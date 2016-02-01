@@ -84,14 +84,20 @@
 		<script src="{{ asset('build/js/app.js') }}" type="text/javascript"></script>
 
 		<!-- CONTROLLERS -->
+		<script src="{{ asset('build/js/controllers/controllerErrors.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/home.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/login.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/clientController.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/controllers/projectController.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/projectNoteController.js') }}" type="text/javascript"></script>
+
+		<!-- FILTERS -->
+		<script src="{{ asset('build/js/filters/dateBr.js') }}" type="text/javascript"></script>
 
 		<!-- SERVICES -->
 		<script src="{{ asset('build/js/services/user.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/client.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/services/project.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/projectNote.js') }}" type="text/javascript"></script>
 	@else
 		<script src="{{ elixir('js/all.js') }}" type="text/javascript"></script>

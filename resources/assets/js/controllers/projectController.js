@@ -1,19 +1,24 @@
 angular.module('app.controllers')
-	.controller('ClientController', 
-	['$scope', '$location', '$routeParams', 'Client', 
-	function($scope, $location, $routeParams, Client) {
+	.controller('ProjectController', 
+	['$scope', '$location', '$cookies', '$routeParams', 'appConfig', 'Project', 'Client', 
+	function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) {
+
+		$scope.clients = Client.query(); // ATENCAO
+
+		$scope.status = appConfig.project.status;
 
 		$scope.cancel = function() {
-			$location.path('/clients');
+			$location.path('/projects'); // ATENCAO
 		}
 
 		$scope.new = function() {
-			$scope.item = new Client();
+			$scope.item = new Project();
+			//$scope.item.project_id = $routeParams.id; // ATENCAO
 		}
 
 		$scope.all = function() {
-		    $scope.items = Client.query(
-		    	{},
+		    $scope.items = Project.query(
+		    	{}, // ATENCAO
 				function(value, responseHeaders) {
                     checkServiceError(value[0]);
 				},
@@ -25,8 +30,8 @@ angular.module('app.controllers')
         }
 
 		$scope.get = function() {
-			$scope.item = Client.get(
-				{id: $routeParams.id},
+			$scope.item = Project.get(
+				{id: $routeParams.id}, // ATENCAO
 				function(value, responseHeaders) {
                     checkServiceError(value);
 				},
@@ -38,11 +43,12 @@ angular.module('app.controllers')
 		}
 
 		$scope.save = function() {
+			$scope.item.owner_id = $cookies.getObject('user').id; // ATENCAO
 			$scope.item.$save(
 				{},
 				function(value, responseHeaders) {
 					if (!checkServiceError(value)) {
-						$location.path('/clients');
+						$location.path('/projects'); // ATENCAO
 					}
 				},
 				function(httpResponse) {
@@ -53,12 +59,14 @@ angular.module('app.controllers')
 		}
 
 		$scope.update = function() {
-			Client.update(
+			//$scope.item.owner_id = $cookies.getObject('user').id; // ATENCAO
+			//$scope.item.owner_id = $scope.item.owner.data.id;
+			Project.update(
 				{id: $scope.item.id}, 
 				$scope.item, 
 				function(value, responseHeaders) {
 					if (!checkServiceError(value)) {
-						$location.path('/clients');
+						$location.path('/projects'); // ATENCAO
 					}
 				},
 				function(httpResponse) {
@@ -69,11 +77,12 @@ angular.module('app.controllers')
 		}
 
 		$scope.remove = function() {
+			//project_id = $scope.item.project_id; // ATENCAO
 			$scope.item.$delete(
 				{},
 				function(value, responseHeaders) {
 					if (!checkServiceError(value)) {
-						$location.path('/clients');
+						$location.path('/projects'); // ATENCAO
 					}
 				},
 				function(httpResponse) {
