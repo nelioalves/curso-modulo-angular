@@ -15,6 +15,19 @@ app.provider('appConfig', function() {
         {key: 2, value: 'Iniciado'},
         {key: 3, value: 'Concluído'}
       ] 
+    },
+    utils: {
+      transformResponse: function(data, headers) {
+        var headersGetter = headers();
+        if (headersGetter['content-type']=='application/json' || headersGetter['content-type']=='application/json') {
+          var dataJson = JSON.parse(data);
+          if (dataJson.hasOwnProperty('data')) {
+            dataJson = dataJson.data;
+          }
+          return dataJson;
+        }
+        return data;
+      }
     }
   };
 
@@ -34,20 +47,10 @@ app.config([
 
     // Por causa da adaptacao de datas que fizemos, precisamos configurar a aplicacao para aceitar
     // os dados do post e put na forma de urlencoded
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-    $httpProvider.defaults.headers.put['Content-Type']  = 'application/x-www-form-urlencoded;charset=utf-8';
+//    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+//    $httpProvider.defaults.headers.put['Content-Type']  = 'application/x-www-form-urlencoded;charset=utf-8';
 
-    $httpProvider.defaults.transformResponse = function(data, headers) {
-      var headersGetter = headers();
-      if (headersGetter['content-type']=='application/json' || headersGetter['content-type']=='application/json') {
-        var dataJson = JSON.parse(data);
-        if (dataJson.hasOwnProperty('data')) {
-          dataJson = dataJson.data;
-        }
-        return dataJson;
-      }
-      return data;
-    };
+    $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
     $routeProvider
       .when('/', {

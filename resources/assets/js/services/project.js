@@ -8,32 +8,15 @@ function($resource, $filter, $httpParamSerializer, appConfig){
 			update: {
 				method: 'PUT'
 			},
-			save: {
-				method: 'POST',
-				transformRequest: function(data, headers) {
-					if (angular.isObject(data) && data.hasOwnProperty('due_date')) {
-						data.due_date = $filter('date')(data.due_date, 'yyyy-MM-dd');
-						return $httpParamSerializer(data);
-					}
-					return data;
-				}
-			},
 			query: {
 				method: 'GET',
 				isArray: true,
 				transformResponse: function(data, headers) {
-					var headersGetter = headers();
-				    if (headersGetter['content-type']=='application/json' || headersGetter['content-type']=='application/json') {
-				    	var dataJson = JSON.parse(data);
-				        if (dataJson.hasOwnProperty('data')) {
-				          dataJson = dataJson.data;
-				        }
-				        if (dataJson.hasOwnProperty('error') && dataJson.error == true) {
-							return [dataJson];
-						}
-				        return dataJson;
-				      }
-				    return data;
+					resp = appConfig.utils.transformResponse(data, headers);
+					if (angular.isObject(resp) && resp.hasOwnProperty('error') && resp.error == true) {
+						return [resp];
+					}
+					return resp;
 				}
 			}
 		}

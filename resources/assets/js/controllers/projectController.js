@@ -3,16 +3,15 @@ angular.module('app.controllers')
 	['$scope', '$location', '$cookies', '$routeParams', 'appConfig', 'Project', 'Client', 
 	function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) {
 
-		$scope.clients = Client.query(); // ATENCAO
-
-		$scope.status = appConfig.project.status;
-
 		$scope.cancel = function() {
 			$location.path('/projects'); // ATENCAO
 		}
 
 		$scope.new = function() {
-			$scope.item = new Project();
+			$scope.clients = Client.query(); // ATENCAO
+			$scope.status = appConfig.project.status; // ATENCAO
+			$scope.item = new Project(); 
+			$scope.item.progress = 0; // ATENCAO
 			//$scope.item.project_id = $routeParams.id; // ATENCAO
 		}
 
@@ -30,6 +29,8 @@ angular.module('app.controllers')
         }
 
 		$scope.get = function() {
+			$scope.clients = Client.query(); // ATENCAO
+			$scope.status = appConfig.project.status; // ATENCAO
 			$scope.item = Project.get(
 				{id: $routeParams.id}, // ATENCAO
 				function(value, responseHeaders) {
