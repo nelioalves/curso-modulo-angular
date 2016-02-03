@@ -12,7 +12,6 @@ angular.module('app.controllers')
 			$scope.status = appConfig.project.status; // ATENCAO
 			$scope.item = new Project(); 
 			$scope.item.progress = 0; // ATENCAO
-			//$scope.item.project_id = $routeParams.id; // ATENCAO
 		}
 
 		$scope.all = function() {

@@ -31,9 +31,14 @@
 						<div class="form-group" ng-class="{'has-error': !form.client_id.$valid && form.client_id.$touched}">
 							<label class="col-md-4 control-label">Client</label>
 							<div class="col-md-6">
+
+								<input type="text" class="form-control" name="client_id" ng-model="item.client_id" typeahead="o.id as o.name for o in clients | filter:viewValue | limitTo:10"/>
+
+								<!--
 								<select class="form-control" name="client_id" ng-model="item.client_id" ng-options="o.id as o.name for o in clients" required>
-									<option value=""><-- Selecione o cliente --></option>
+									<option value="">-- Selecione o cliente --</option>
 								</select>
+								-->
 								<div ng-messages="form.client_id.$error" class="help-block" ng-show="form.client_id.$touched">
 									<div ng-message="required">Campo obrigatório</div>
 								</div>
@@ -66,7 +71,7 @@
 							<label class="col-md-4 control-label">Status</label>
 							<div class="col-md-6">
 								<select class="form-control" name="status" ng-model="item.status" ng-options="o.key as o.value for o in status" required>
-									<option value=""><-- Selecione o status --></option>
+									<option value="">-- Selecione o status --</option>
 								</select>
 								<div ng-messages="form.status.$error" class="help-block" ng-show="form.status.$touched">
 									<div ng-message="required">Campo obrigatório</div>
