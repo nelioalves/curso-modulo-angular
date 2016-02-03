@@ -73,8 +73,8 @@ class ClientService {
             return Errors::invalidId($id);
         }
 
-        foreach ($entity->projects as $proj) {
-            $this->projectService->delete($proj->id);
+        if (count($entity->projects) > 0) {
+            return Errors::basic("Este cliente possui projetos. Exclusão cancelada.");
         }
 
         $this->repository->delete($id);

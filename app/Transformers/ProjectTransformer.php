@@ -20,6 +20,8 @@ class ProjectTransformer extends TransformerAbstract {
 			'progress' => $project->progress,
 			'status' => $project->status,
 			'due_date' => $project->due_date,
+			'client_id' => $project->client_id,
+			'owner_id' => $project->owner_id,
 		];
 	}
 
