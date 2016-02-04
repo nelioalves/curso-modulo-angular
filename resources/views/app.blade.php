@@ -91,6 +91,9 @@
 		<script src="{{ asset('build/js/controllers/projectController.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/projectNoteController.js') }}" type="text/javascript"></script>
 
+		<script src="{{ asset('build/js/controllers/ui-datepicker.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/controllers/ui-datepicker2.js') }}" type="text/javascript"></script>
+
 		<!-- FILTERS -->
 		<script src="{{ asset('build/js/filters/dateBr.js') }}" type="text/javascript"></script>
 
@@ -99,6 +102,7 @@
 		<script src="{{ asset('build/js/services/client.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/project.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/projectNote.js') }}" type="text/javascript"></script>
+
 	@else
 		<script src="{{ elixir('js/all.js') }}" type="text/javascript"></script>
 	@endif

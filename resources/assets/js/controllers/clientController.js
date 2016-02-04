@@ -5,11 +5,11 @@ angular.module('app.controllers')
 
 		$scope.cancel = function() {
 			$location.path('/clients');
-		}
+		};
 
 		$scope.new = function() {
 			$scope.item = new Client();
-		}
+		};
 
 		$scope.all = function() {
 		    $scope.items = Client.query(
@@ -22,7 +22,7 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 		    );
-        }
+        };
 
 		$scope.get = function() {
 			$scope.item = Client.get(
@@ -35,7 +35,7 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 			);
-		}
+		};
 
 		$scope.save = function() {
 			$scope.item.$save(
@@ -50,7 +50,7 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 			);
-		}
+		};
 
 		$scope.update = function() {
 			Client.update(
@@ -66,7 +66,7 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 			);
-		}
+		};
 
 		$scope.remove = function() {
 			$scope.item.$delete(
@@ -81,5 +81,5 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 			);
-		}
+		};
 	}]);

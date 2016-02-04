@@ -1,12 +1,21 @@
 angular.module('app.services')
 .service('Project', ['$resource', '$filter', '$httpParamSerializer', 'appConfig', 
 function($resource, $filter, $httpParamSerializer, appConfig){
+
+	function transformDateFields(data) {
+		return appConfig.utils.transformData($filter, ['due_date'], 'yyyy-MM-dd', data);
+	};
+
 	return $resource(
 		appConfig.baseUrl + '/project/:id', 
 		{id: '@id'}, 
 		{
 			update: {
 				method: 'PUT'
+			},
+			save: {
+				method: 'POST',
+				transformRequest: transformDateFields
 			},
 			query: {
 				method: 'GET',

@@ -1,14 +1,15 @@
 var app = angular.module('app', [
   'ngRoute', 'angular-oauth2', 'app.controllers', 
-  'app.services', 'app.filters', 
-  "ui.bootstrap.typeahead", "ui.bootstrap.tpls"
+  'app.services', 'app.filters', 'ngAnimate',
+  'ui.bootstrap.tpls', 'ui.bootstrap.typeahead', 'ui.bootstrap.datepicker'
 ]);
 
 angular.module('app.controllers', ['ngMessages','angular-oauth2']);
 angular.module('app.filters', []);
 angular.module('app.services', ['ngResource']);
 
-app.provider('appConfig', function() {
+app.provider('appConfig', ['$httpParamSerializerProvider', 
+function($httpParamSerializerProvider) {
   var config = {
     baseUrl: 'http://localhost:8000',
     project: {
@@ -19,6 +20,12 @@ app.provider('appConfig', function() {
       ] 
     },
     utils: {
+      transformRequest: function(data) {
+        if (angular.isObject(data)) {
+          return $httpParamSerializerProvider.$get()(data);
+        }
+        return data;
+      },
       transformResponse: function(data, headers) {
         var headersGetter = headers();
         if (headersGetter['content-type']=='application/json' || headersGetter['content-type']=='application/json') {
@@ -27,6 +34,19 @@ app.provider('appConfig', function() {
             dataJson = dataJson.data;
           }
           return dataJson;
+        }
+        return data;
+      },
+      transformData: function (filter, dateFields, strFormat, data) {
+        if (angular.isObject(data)) {
+          var i;
+          var o = angular.copy(data);
+          for (i=0; i<dateFields.length; i++) {
+            if (data.hasOwnProperty(dateFields[i])) {
+              o[dateFields[i]] = filter('date')(data[dateFields[i]], strFormat);
+            }
+          }
+          return $httpParamSerializerProvider.$get()(o);
         }
         return data;
       }
@@ -39,7 +59,7 @@ app.provider('appConfig', function() {
         return config;
     }
   }
-});
+}]);
 
 // config so aceita provider, portanto criamos um provider acima (ATENCAO AO PADRAO DE 
   //NOMES: o provider chama 'appConfig' e aqui ele eh referenciado como 'appConfigProvider')
@@ -49,9 +69,10 @@ app.config([
 
     // Por causa da adaptacao de datas que fizemos, precisamos configurar a aplicacao para aceitar
     // os dados do post e put na forma de urlencoded
-//    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-//    $httpProvider.defaults.headers.put['Content-Type']  = 'application/x-www-form-urlencoded;charset=utf-8';
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    $httpProvider.defaults.headers.put['Content-Type']  = 'application/x-www-form-urlencoded;charset=utf-8';
 
+    $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
     $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
     $routeProvider
@@ -122,6 +143,12 @@ app.config([
       .when('/project/:id/notes/:idNote', {
           templateUrl: 'build/views/projectNote/show.html',
           controller: 'ProjectNoteController'
+      })
+
+
+      .when('/ui-datepicker', {
+          templateUrl: 'build/views/ui/datepicker.html',
+          controller: 'DatepickerDemoCtrl'
       })
     ;
 

@@ -7,12 +7,12 @@ angular.module('app.controllers')
 
 		$scope.cancel = function() {
 			$location.path('/project/'+$scope.item.project_id+'/notes'); // ATENCAO
-		}
+		};
 
 		$scope.new = function() {
 			$scope.item = new ProjectNote();
 			$scope.item.project_id = $routeParams.id; // ATENCAO
-		}
+		};
 
 		$scope.all = function() {
 		    $scope.items = ProjectNote.query(
@@ -25,7 +25,7 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 		    );
-        }
+        };
 
 		$scope.get = function() {
 			$scope.item = ProjectNote.get(
@@ -38,7 +38,7 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 			);
-		}
+		};
 
 		$scope.save = function() {
 			$scope.item.$save(
@@ -53,7 +53,7 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 			);
-		}
+		};
 
 		$scope.update = function() {
 			ProjectNote.update(
@@ -69,7 +69,7 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 			);
-		}
+		};
 
 		$scope.remove = function() {
 			project_id = $scope.item.project_id; // ATENCAO
@@ -85,5 +85,5 @@ angular.module('app.controllers')
 					console.log(httpResponse);
 				}
 			);
-		}
+		};
 	}]);

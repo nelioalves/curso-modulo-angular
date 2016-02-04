@@ -5,4 +5,6 @@ var checkServiceError = function(obj) {
     	return true;
 	}			
 	return false;
-}
+};
+
+
