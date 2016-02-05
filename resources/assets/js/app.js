@@ -154,6 +154,10 @@ app.config([
           templateUrl: 'build/views/ui/datepicker.html',
           controller: 'DatepickerDemoCtrl'
       })
+      .when('/ui-typeahead', {
+          templateUrl: 'build/views/ui/typeahead.html',
+          controller: 'TypeaheadCtrl'
+      })
     ;
 
     OAuthProvider.configure({

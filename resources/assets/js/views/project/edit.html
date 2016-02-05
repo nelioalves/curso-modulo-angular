@@ -31,16 +31,18 @@
 						<div class="form-group" ng-class="{'has-error': !form.client_id.$valid && form.client_id.$touched}">
 							<label class="col-md-4 control-label">Client</label>
 							<div class="col-md-6">
-								<!--
-								<input type="text" class="form-control" name="client_id" ng-model="item.client_id" typeahead="o.id as o.name for o in clients | filter:viewValue | limitTo:10"/>
-								-->
-								
+
+								 <input class="form-control" type="text" name="client_id" ng-model="item.client.data" uib-typeahead="o as o.name for o in getClients($viewValue) | limitTo:8"  typeahead-input-formatter="formatName($model)" typeahead-on-select="selectClient($item)" typeahead-editable="false" required />
+
+								<!--								
 								<select class="form-control" name="client_id" ng-model="item.client_id" ng-options="o.id as o.name for o in clients" required>
 									<option value="">-- Selecione o cliente --</option>
 								</select>
+								-->
 								
 								<div ng-messages="form.client_id.$error" class="help-block" ng-show="form.client_id.$touched">
 									<div ng-message="required">Campo obrigatório</div>
+									<div ng-message="editable">Client inválido</div>
 								</div>
 							</div>
 						</div>
@@ -50,9 +52,9 @@
 
 						    <div class="col-md-6">
 					            <p class="input-group">
-					              <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="item.due_date" name="due_date" is-open="popup2.opened" ng-required="true" close-text="Close" />
+					              <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="item.due_date" name="due_date" is-open="due_date_popup.opened" ng-required="true" close-text="Close" />
 					              <span class="input-group-btn">
-					                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+					                <button type="button" class="btn btn-default" ng-click="due_date_open()"><i class="glyphicon glyphicon-calendar"></i></button>
 					              </span>
 					            </p>
 

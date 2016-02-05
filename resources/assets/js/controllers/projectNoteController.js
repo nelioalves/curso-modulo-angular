@@ -5,7 +5,7 @@ function($scope, $location, $routeParams, ProjectNote) {
 
 	$scope.cancel = function() {
 		var id = $scope.item.project_id;
-		$location.path('/project/'+$id+'/notes'); // ATENCAO
+		$location.path('/project/'+id+'/notes'); // ATENCAO
 	};
 
 	$scope.new = function() {

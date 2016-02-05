@@ -8,7 +8,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 	};
 
 	$scope.new = function() {
-		$scope.clients = Client.query(); // ATENCAO
+		//$scope.clients = Client.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
 		$scope.status = appConfig.project.status; // ATENCAO
 		$scope.item = new Project(); 
 		$scope.item.due_date = new Date();
@@ -29,7 +29,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
     };
 
 	$scope.get = function() {
-		$scope.clients = Client.query(); // ATENCAO
+		//$scope.clients = Client.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
 		$scope.status = appConfig.project.status; // ATENCAO
 		$scope.item = Project.get(
 			{id: $routeParams.id}, // ATENCAO
@@ -93,13 +93,33 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 	//---------------------------------------------
 	// Datepicker:
 
-	$scope.popup2 = {
+	$scope.due_date_popup = {
 	    opened: false
 	};
 
-	$scope.open2 = function() {
-	    $scope.popup2.opened = true;
+	$scope.due_date_open = function() {
+	    $scope.due_date_popup.opened = true;
 	};
 
+	//---------------------------------------------
+	// Typeahead:
+
+	$scope.formatName = function(obj) {
+		if (obj) {
+			return obj.name;
+		}
+		return '';
+	};
+
+	$scope.getClients = function(name) {
+		return Client.query({
+			search: name,
+			searchFields: 'name:like'
+		}).$promise;
+	};
+
+	$scope.selectClient = function(obj) {
+		$scope.item.client_id = obj.id;
+	};
 
 }]);
