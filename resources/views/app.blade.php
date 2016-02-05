@@ -34,21 +34,22 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
+				<a class="navbar-brand" href="#/">Início</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Welcome</a></li>
+					<li><a href="#/clients">Client</a></li>
+					<li><a href="#/projects">Project</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
 					@if(auth()->guest())
 						@if(!Request::is('auth/login'))
-							<li><a href="{{ url('/auth/login') }}">Login</a></li>
+							<li><a href="#/login">Login</a></li>
 						@endif
 						@if(!Request::is('auth/register'))
-							<li><a href="{{ url('/auth/register') }}">Register</a></li>
+							<li><a href="#/">Register</a></li>
 						@endif
 					@else
 						<li class="dropdown">
@@ -92,7 +93,6 @@
 		<script src="{{ asset('build/js/controllers/projectNoteController.js') }}" type="text/javascript"></script>
 
 		<script src="{{ asset('build/js/controllers/ui-datepicker.js') }}" type="text/javascript"></script>
-		<script src="{{ asset('build/js/controllers/ui-datepicker2.js') }}" type="text/javascript"></script>
 
 		<!-- FILTERS -->
 		<script src="{{ asset('build/js/filters/dateBr.js') }}" type="text/javascript"></script>

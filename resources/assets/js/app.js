@@ -124,6 +124,10 @@ app.config([
           templateUrl: 'build/views/project/remove.html',
           controller: 'ProjectController'
       })
+      .when('/projects/:id', {
+          templateUrl: 'build/views/project/show.html',
+          controller: 'ProjectController'
+      })
       .when('/project/:id/notes', {
           templateUrl: 'build/views/projectNote/list.html',
           controller: 'ProjectNoteController'

@@ -41,7 +41,7 @@ $factory->define(CodeProject\Entities\Project::class, function (Faker\Generator 
         'description' => $faker->sentence,
         'progress' => rand(1,100),
         'status' => rand(1,3),
-        'due_date' => rand(1,28)."/".rand(1,12)."/".rand(2010,2013),
+        'due_date' => DateTime::createFromFormat('d/m/Y', (rand(1,28)."/".rand(1,12)."/".rand(2010,2013))),
     ];
 });
 
@@ -49,8 +49,8 @@ $factory->define(CodeProject\Entities\ProjectTask::class, function (Faker\Genera
     return [
         'name' => $faker->sentence,
         'project_id' => rand(1,10),
-        'start_date' => rand(1,28)."/".rand(1,12)."/".rand(2014,2015),
-        'due_date' => rand(1,28)."/".rand(1,12)."/".rand(2016,2016),
+        'start_date' => DateTime::createFromFormat('d/m/Y', (rand(1,28)."/".rand(1,12)."/".rand(2014,2015))),
+        'due_date' => DateTime::createFromFormat('d/m/Y', (rand(1,28)."/".rand(1,12)."/".rand(2016,2016))),
         'status' => rand(1,3),
     ];
 });

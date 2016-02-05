@@ -60,8 +60,6 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 	};
 
 	$scope.update = function() {
-		//$scope.item.owner_id = $cookies.getObject('user').id; // ATENCAO
-		//$scope.item.owner_id = $scope.item.owner.data.id;
 		Project.update(
 			{id: $scope.item.id}, 
 			$scope.item, 
@@ -78,7 +76,6 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 	};
 
 	$scope.remove = function() {
-		//project_id = $scope.item.project_id; // ATENCAO
 		$scope.item.$delete(
 			{},
 			function(value, responseHeaders) {
