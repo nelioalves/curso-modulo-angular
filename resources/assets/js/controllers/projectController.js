@@ -8,7 +8,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 	};
 
 	$scope.new = function() {
-		//$scope.clients = Client.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
+		$scope.clients = Client.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
 		$scope.status = appConfig.project.status; // ATENCAO
 		$scope.item = new Project(); 
 		$scope.item.due_date = new Date();
@@ -29,7 +29,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
     };
 
 	$scope.get = function() {
-		//$scope.clients = Client.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
+		$scope.clients = Client.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
 		$scope.status = appConfig.project.status; // ATENCAO
 		$scope.item = Project.get(
 			{id: $routeParams.id}, // ATENCAO
