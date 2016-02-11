@@ -20,6 +20,9 @@ function($httpParamSerializerProvider) {
         {key: 3, value: 'Concluído'}
       ] 
     },
+    urls: {
+      projectFile: '/project/file/{{id}}/{{idFile}}'
+    },
     utils: {
       transformRequest: function(data) {
         if (angular.isObject(data)) {
@@ -148,6 +151,22 @@ app.config([
       .when('/project/:id/notes/:idNote', {
           templateUrl: 'build/views/projectNote/show.html',
           controller: 'ProjectNoteController'
+      })
+      .when('/project/:id/files', {
+          templateUrl: 'build/views/projectFile/list.html',
+          controller: 'ProjectFileController'
+      })
+      .when('/project/:id/files/new', {
+          templateUrl: 'build/views/projectFile/new.html',
+          controller: 'ProjectFileController'
+      })
+      .when('/project/:id/files/:idFile/edit', {
+          templateUrl: 'build/views/projectFile/edit.html',
+          controller: 'ProjectFileController'
+      })
+      .when('/project/:id/files/:idFile/remove', {
+          templateUrl: 'build/views/projectFile/remove.html',
+          controller: 'ProjectFileController'
       })
 
 

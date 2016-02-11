@@ -86,7 +86,8 @@ class ProjectFileService {
 
             $data['extension'] = $data['file']->getClientOriginalExtension();
             
-            $projectFile = $this->repository->create($data);
+            $projectFile = $project->files()->create($data);
+            //$projectFile = $this->repository->skipPresenter()->create($data);
 
         	$nome = $projectFile->id.".".$data['extension'];
         	$arquivo = $this->filesystem->get($data['file']);
@@ -109,10 +110,33 @@ class ProjectFileService {
            return Errors::basic('Acesso negado. Você não é membro do projeto deste arquivo.');
         }
 
-        $nome = $projectFile->id.'.'.$projectFile->extension;
         $this->repository->delete($file_id);
-        $this->storage->delete($nome);
+
+        $nome = $projectFile->id.'.'.$projectFile->extension;
+        if ($this->storage->exists($nome)) {
+            $this->storage->delete($nome);
+        }
+
         return ['message' => "Registro e arquivo deletados!"];    
     }
 
+    public function getFilePath($file_id) {
+        $projectFile = ProjectFile::find($file_id);
+        if (is_null($projectFile)) {
+            return Errors::invalidId($file_id);
+        }
+
+        return $this->getBaseURL($projectFile);
+    }
+
+    private function getBaseURL($projectFile) {
+        switch ($this->storage->getDefaultDriver()) {
+            case 'local':
+                return $this->storage->getDriver()->getAdapter()->getPathPrefix()
+                .'/'.$projectFile->id.'.'.$projectFile->extension;
+            
+            default:
+                return Errors::basic('Driver de arquivo não tratado.');
+        }
+    }
 }

@@ -29,11 +29,18 @@ Route::group(['middleware'=>'oauth'], function() {
 	// Rotas relacionadas a ProjectFile
 
 	Route::post('project/file', 'ProjectFileController@store');
+
+	// FALTA MIDDLEWARE PARA DELETE E PUT:
 	Route::delete('project/file/{file}', 'ProjectFileController@destroy');
+	//FALTA: 
+	Route::put('project/file/{file}', 'ProjectFileController@update');
+
 
 	Route::group(['middleware'=>'check-project-member'], function() {
 		Route::get('project/file/{project}', 'ProjectFileController@index');
 		Route::get('project/file/{project}/{file}', 'ProjectFileController@show');
+		//FALTA:
+		Route::get('project/file/{project}/{file}/download', 'ProjectFileController@showFile');
 	});
 
 	// Rotas relacionadas a ProjectTask
