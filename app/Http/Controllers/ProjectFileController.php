@@ -47,4 +47,7 @@ class ProjectFileController extends Controller
         return $this->service->delete($file_id);
     }
 
+    public function update(Request $request, $file_id) {
+        return $this->service->update($request->all(), $file_id);
+    }
 }

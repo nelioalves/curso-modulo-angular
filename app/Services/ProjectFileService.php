@@ -9,6 +9,7 @@ use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectFileValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 use Illuminate\FileSystem\FileSystem;
 use Illuminate\Contracts\FileSystem\Factory as Storage;
@@ -72,7 +73,7 @@ class ProjectFileService {
 
     public function createFile(array $data) {
         try {
-            $this->validator->with($data)->passesOrFail();
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $project = Project::find($data['project_id']);
             if (is_null($project)) {
@@ -150,4 +151,34 @@ class ProjectFileService {
                 return Errors::basic('Driver de arquivo não tratado.');
         }
     }
+
+    public function update(array $data, $file_id) {
+        $file = ProjectFile::find($file_id);
+        if (is_null($file)) {
+            return Errors::invalidId($file_id);
+        }
+
+        try {
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            if ($data['project_id'] != $file->project_id) {
+                return Errors::basic('Você não pode alterar o projeto do arquivo.');
+            }
+
+            if ($data['extension'] != $file->extension) {
+                return Errors::basic('Você não pode alterar a extensão do arquivo.');
+            }
+            
+            $user_id = \Authorizer::getResourceOwnerId();
+            if (!$this->projectRepository->isMember($file->project_id, $user_id)) {
+               return Errors::basic('Acesso negado. Você não é membro do projeto selecionado.');
+            }
+
+            return $this->repository->update($data, $file_id);
+        }
+        catch (ValidatorException $e) {
+            return Errors::basic($e->getMessageBag());
+        }
+    }
+
 }

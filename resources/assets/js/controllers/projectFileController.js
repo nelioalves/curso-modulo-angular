@@ -34,14 +34,15 @@ function($scope, $location, $routeParams, appConfig, Url, Upload, ProjectFile) {
 			}
 	    );
     };
-/*
+
 	$scope.get = function() {
 		var id = $routeParams.id; // ATENCAO (salva o id do projeto)
-		$scope.item = ProjectNote.get(
-			{id: $routeParams.id, idNote: $routeParams.idNote}, // ATENCAO
+		$scope.item = ProjectFile.get(
+			{id: $routeParams.id, idFile: $routeParams.idFile}, // ATENCAO
 			function(value, responseHeaders) {
+				console.log($scope.item);
                 if (checkServiceError(value)) {
-                	$location.path('/project/'+id+'/notes');
+                	$location.path('/project/'+id+'/files');
                 }
 			},
 			function(httpResponse) {
@@ -50,7 +51,7 @@ function($scope, $location, $routeParams, appConfig, Url, Upload, ProjectFile) {
 			}
 		);
 	};
-*/
+
 	$scope.save = function() {
 		var id = $scope.item.project_id; // ATENCAO (salva o id do projeto)
 		var url = appConfig.baseUrl + 
@@ -93,15 +94,15 @@ function($scope, $location, $routeParams, appConfig, Url, Upload, ProjectFile) {
 		);
 		*/
 	};
-/*
+
 	$scope.update = function() {
 		var id = $scope.item.project_id; // ATENCAO
-		ProjectNote.update(
+		ProjectFile.update(
 			{id: $scope.item.id}, 
 			$scope.item, 
 			function(value, responseHeaders) {
                 checkServiceError(value);
-               	$location.path('/project/'+id+'/notes');
+               	$location.path('/project/'+id+'/files');
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -116,7 +117,7 @@ function($scope, $location, $routeParams, appConfig, Url, Upload, ProjectFile) {
 			{},
 			function(value, responseHeaders) {
                 checkServiceError(value);
-               	$location.path('/project/'+id+'/notes');
+               	$location.path('/project/'+id+'/files');
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -124,5 +125,5 @@ function($scope, $location, $routeParams, appConfig, Url, Upload, ProjectFile) {
 			}
 		);
 	};
-*/
+
 }]);

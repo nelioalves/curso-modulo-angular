@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default" >
-				<div class="panel-heading">Edição</div>
+				<div class="panel-heading">Cadastrar</div>
 				<div class="panel-body">
 
 					<form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()" ng-init="new()">
@@ -35,11 +35,13 @@
 							<label class="col-md-4 control-label">File</label>
 							<div class="col-md-6">
 
-								<input class="form-control" type="file" ngf-select ng-model="item.file" name="file" />
-
 								<!--
-								<div class="btn btn-info" ngf-select ng-model="item.file" name="file" >Select</div>
+								<input class="form-control" type="file" ngf-select ng-model="item.file" name="file" />
 								-->
+								
+								<div class="btn btn-info" ngf-select ng-model="item.file" name="file" >Select</div>
+								{{item.file.name}}
+								
 
 								<div ng-messages="form.file.$error" class="help-block" ng-show="form.file.$touched">
 									<div ng-message="required">Campo obrigatório</div>
