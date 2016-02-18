@@ -40,7 +40,7 @@ Route::group(['middleware'=>'oauth'], function() {
 		Route::get('project/file/{project}', 'ProjectFileController@index');
 		Route::get('project/file/{project}/{file}', 'ProjectFileController@show');
 		//FALTA:
-		Route::get('project/file/{project}/{file}/download', 'ProjectFileController@showFile');
+		Route::get('project/file/{file}/download', 'ProjectFileController@showFile');
 	});
 
 	// Rotas relacionadas a ProjectTask

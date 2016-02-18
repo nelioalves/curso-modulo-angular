@@ -1,12 +1,13 @@
 var app = angular.module('app', [
   'ngRoute', 'angular-oauth2', 'app.controllers', 
-  'app.services', 'app.filters', 'ngAnimate',
-  'ui.bootstrap.tpls', 'ui.bootstrap.typeahead', 
+  'app.services', 'app.filters', 'app.directives',
+  'ngAnimate', 'ui.bootstrap.tpls', 'ui.bootstrap.typeahead', 
   'ui.bootstrap.datepicker', 'ngFileUpload'
 ]);
 
 angular.module('app.controllers', ['ngMessages','angular-oauth2']);
 angular.module('app.filters', []);
+angular.module('app.directives', []);
 angular.module('app.services', ['ngResource']);
 
 app.provider('appConfig', ['$httpParamSerializerProvider', 

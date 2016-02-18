@@ -13,7 +13,7 @@
 							<th>Id</th>
 							<th>Name</th>
 							<th>Description</th>
-							<th>Extension</th>
+							<th>Link</th>
 							<th>Ação</th>
 						</tr>
 						</thead>
@@ -24,7 +24,10 @@
 							</td>
 							<td>{{o.name}}</td>
 							<td>{{o.description | limitTo:25}}...</td>
-							<td>{{o.extension}}</td>
+							<td>
+								<project-file-download></project-file-download>
+								<!-- <a ng-href="/project/file/{{o.id}}/download" target="_blank">Baixar</a> --> 
+							</td>
 							<td>
 								<a ng-href="#/project/{{father_id}}/files/{{o.id}}/edit" class="btn btn-primary btn-xs">Editar</a>
 								<a ng-href="#/project/{{father_id}}/files/{{o.id}}/remove" class="btn btn-danger btn-xs">Excluir</a>

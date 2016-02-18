@@ -26,7 +26,7 @@ class ProjectFileController extends Controller
         return $this->service->find($project_id, $file_id);
     }
 
-    public function showFile($project_id, $file_id) {
+    public function showFile($file_id) {
         return response()->download($this->service->getFilePath($file_id));
     }
 

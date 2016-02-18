@@ -97,6 +97,9 @@
 		<script src="{{ asset('build/js/controllers/ui-datepicker.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/ui-typeahead.js') }}" type="text/javascript"></script>
 
+		<!-- DIRECTIVES -->
+		<script src="{{ asset('build/js/directives/projectFileDownload.js') }}" type="text/javascript"></script>
+
 		<!-- FILTERS -->
 		<script src="{{ asset('build/js/filters/dateBr.js') }}" type="text/javascript"></script>
 

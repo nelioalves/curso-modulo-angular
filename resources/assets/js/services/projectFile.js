@@ -1,9 +1,9 @@
 angular.module('app.services')
-.service('ProjectFile', ['$resource', 'appConfig', 
-function($resource, appConfig){
+.service('ProjectFile', ['$resource', 'appConfig', 'Url', 
+function($resource, appConfig, Url){
+	var url = appConfig.baseUrl + Url.getUrlResource(appConfig.urls.projectFile);
 	return $resource(
-		appConfig.baseUrl + '/project/file/:id/:idFile', 
-		{id: '@id', idFile: '@idFile'}, 
+		url,  
 		{
 			update: {
 				method: 'PUT'
