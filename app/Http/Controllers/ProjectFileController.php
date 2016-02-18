@@ -27,11 +27,10 @@ class ProjectFileController extends Controller
     }
 
     public function showFile($file_id) {
-        return response()->download($this->service->getFilePath($file_id));
+        return $this->service->downloadFile($file_id);
     }
 
     public function store(Request $request) {
-
         $data = $request->all();
 
         if (array_key_exists('file', $data)) {

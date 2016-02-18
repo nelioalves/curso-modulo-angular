@@ -4,6 +4,7 @@ function($resource, appConfig, Url){
 	var url = appConfig.baseUrl + Url.getUrlResource(appConfig.urls.projectFile);
 	return $resource(
 		url,  
+		{id: '@id', idFile: '@idFile'},
 		{
 			update: {
 				method: 'PUT'
@@ -18,6 +19,12 @@ function($resource, appConfig, Url){
 					}
 					return resp;
 				}
+			},
+			download: {
+				method: 'GET',
+				url: url + '/download'
+				//url: appConfig.baseUrl + '/projectfiledownload/:idFile' 
+				//url: appConfig.baseUrl + Url.getUrlResource(appConfig.urls.projectFile) + '/download'
 			}
 		}
 	);

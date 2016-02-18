@@ -120,20 +120,31 @@ class ProjectFileService {
         return ['message' => "Registro e arquivo deletados!"];    
     }
 
-    public function getFilePath($file_id) {
+    public function downloadFile($file_id) {
         $projectFile = ProjectFile::find($file_id);
         if (is_null($projectFile)) {
             return Errors::invalidId($file_id);
         }
 
-        return $this->getBaseURL($projectFile);
+        $filePath = $this->getBaseURL($projectFile);
+        $fileContent = file_get_contents($filePath);
+        $file64 = base64_encode($fileContent);
+        return [
+            'file' => $file64,
+            'size' => filesize($filePath),
+            'name' => $projectFile->id.'.'.$projectFile->extension,
+        ];
     }
 
     private function getBaseURL($projectFile) {
         switch ($this->storage->getDefaultDriver()) {
+
+            // ATENCAO: TIVE QUE DESCOMENTAR extension=php_fileinfo.dll NO PHP.INI
             case 'local':
                 return $this->storage->getDriver()->getAdapter()->getPathPrefix()
                 .'/'.$projectFile->id.'.'.$projectFile->extension;
+                /*return $this->storage->getDriver()->getAdapter()->getPathPrefix()
+                .$projectFile->id.'.'.$projectFile->extension;*/
             
             default:
                 return Errors::basic('Driver de arquivo não tratado.');

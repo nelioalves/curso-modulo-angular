@@ -9,8 +9,20 @@ function(appConfig, ProjectFile){
 		link: function(scope, element, attr) {
 
 		},
-		controller: ['$scope', '$attrs', function($scope, $attrs) {
+		controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
+			$scope.downloadFile = function() {
+				var anchor = $element.children()[0];
+				$jQuery(anchor).addClass('disabled');
+				$jQuery(anchor).text('Loading...');
 
+				ProjectFile.download({id:null, idFile: $attrs.idFile} , function(data){
+					console.log(data);
+				});
+
+//				ProjectFile.download({id:null, idFile: $attrs.idFile} , function(data){
+//					console.log(data);
+//				});
+			};
 		}]
 	};
 }]);
