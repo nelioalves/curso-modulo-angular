@@ -28,24 +28,19 @@ Route::group(['middleware'=>'oauth'], function() {
 
 	// Rotas relacionadas a ProjectFile
 
-	Route::post('project/file', 'ProjectFileController@store');
-
-	// FALTA MIDDLEWARE PARA ESTES:
-	//FALTA: 
-	Route::delete('project/file/{file}', 'ProjectFileController@destroy');
-	//FALTA: 
-	Route::put('project/file/{file}', 'ProjectFileController@update');
-	//FALTA:
-	Route::get('project/file/{file}/download', 'ProjectFileController@showFile');
+	Route::group(['middleware'=>'check-file-member'], function() {
+		Route::delete('project/file/{file}', 'ProjectFileController@destroy');
+		Route::put('project/file/{file}', 'ProjectFileController@update');
+		Route::get('project/file/{file}/download', 'ProjectFileController@showFile');
+	});
 
 	Route::group(['middleware'=>'check-project-member'], function() {
+		Route::post('project/file', 'ProjectFileController@store');
 		Route::get('project/file/{project}', 'ProjectFileController@index');
 		Route::get('project/file/{project}/{file}', 'ProjectFileController@show');
 	});
 
 	// Rotas relacionadas a ProjectTask
-
-	Route::post('project/task', 'ProjectTaskController@store');
 
 	Route::group(['middleware'=>'check-project-member'], function() {
 		Route::get('project/task/{project}', 'ProjectTaskController@index');
@@ -53,15 +48,15 @@ Route::group(['middleware'=>'oauth'], function() {
 	});
 
 	Route::group(['middleware'=>'check-task-member'], function() {
+		Route::post('project/task', 'ProjectTaskController@store');
 		Route::delete('project/task/{task}', 'ProjectTaskController@destroy');
 		Route::put('project/task/{task}', 'ProjectTaskController@update');
 	});
 
 	// Rotas relacionadas a ProjectNote
 
-	Route::post('project/note', 'ProjectNoteController@store');
-
 	Route::group(['middleware'=>'check-project-member'], function() {
+		Route::post('project/note', 'ProjectNoteController@store');
 		Route::get('project/note/{project}', 'ProjectNoteController@index');
 		Route::get('project/note/{project}/{note}', 'ProjectNoteController@show');
 	});

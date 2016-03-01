@@ -6,10 +6,11 @@ use Closure;
 use CodeProject\Repositories\ProjectRepository;
 
 use CodeProject\Entities\Project;
+use CodeProject\Entities\ProjectFile;
 
 use CodeProject\Services\Errors;
 
-class CheckProjectMember
+class CheckFileMember
 {
 
     private $repository;
@@ -27,15 +28,16 @@ class CheckProjectMember
      */
     public function handle($request, Closure $next)
     {
-        $project_id = $request->route('project') ? $request->route('project') : $request->all()['project_id'];
+        $file_id = $request->file;
         $user_id = \Authorizer::getResourceOwnerId();
         
-        if (is_null(Project::find($project_id))) {
-            return Errors::invalidId($project_id);
+        $file = ProjectFile::find($file_id);
+        if (is_null($file)) {
+            return Errors::invalidId($file_id);
         }
 
-        if (!$this->repository->isMember($project_id, $user_id)) {
-            return Errors::basic('Acesso negado! Você não é membro deste projeto.');
+        if (!$this->repository->isMember($file->project_id, $user_id)) {
+            return Errors::basic('Acesso negado! Você não é membro do projeto deste arquivo.');
         }
         return $next($request);
     }

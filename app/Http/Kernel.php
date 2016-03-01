@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'check-project-member' => \CodeProject\Http\Middleware\CheckProjectMember::class,
         'check-task-member' => \CodeProject\Http\Middleware\CheckTaskMember::class,
         'check-note-member' => \CodeProject\Http\Middleware\CheckNoteMember::class,
+        'check-file-member' => \CodeProject\Http\Middleware\CheckFileMember::class,
 
     ];
 }
