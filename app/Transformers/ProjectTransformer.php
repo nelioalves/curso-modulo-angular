@@ -22,6 +22,7 @@ class ProjectTransformer extends TransformerAbstract {
 			'due_date' => $project->due_date,
 			'client_id' => $project->client_id,
 			'owner_id' => $project->owner_id,
+			'is_member' => $project->owner_id != \Authorizer::getResourceOwnerId(),
 		];
 	}
 

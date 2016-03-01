@@ -2,8 +2,13 @@ angular.module('app.services')
 .service('Project', ['$resource', '$filter', 'appConfig', 
 function($resource, $filter, appConfig){
 
-	function transformDateFields(data) {
-		return appConfig.utils.transformData($filter, ['due_date'], 'yyyy-MM-dd', data);
+	function transformDateFieldsReq(data) {
+		return appConfig.utils.transformDataReq($filter, ['due_date'], 'yyyy-MM-dd', data);
+	};
+
+	function transformDateFieldsResp(data, headers) {
+        var obj = appConfig.utils.transformResponse(data, headers);
+		return appConfig.utils.transformDataResp(['due_date'], obj);
 	};
 
 	return $resource(
@@ -12,11 +17,11 @@ function($resource, $filter, appConfig){
 		{
 			update: {
 				method: 'PUT',
-				transformRequest: transformDateFields
+				transformRequest: transformDateFieldsReq
 			},
 			save: {
 				method: 'POST',
-				transformRequest: transformDateFields
+				transformRequest: transformDateFieldsReq
 			},
 			query: {
 				method: 'GET',
@@ -31,15 +36,7 @@ function($resource, $filter, appConfig){
 			},
 			get: {
 				method: 'GET',
-				transformResponse: function(data, headers) {
-					var o = appConfig.utils.transformResponse(data, headers);
-					if (angular.isObject(o) && o.hasOwnProperty('due_date')) {
-						var vet = o.due_date.split('-');
-						var month = parseInt(vet[1])-1;
-						o.due_date = new Date(vet[0], month, vet[2]);
-					}
-					return o; 
-				}
+				transformResponse: transformDateFieldsResp
 			}
 		}
 	);

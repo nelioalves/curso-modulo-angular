@@ -42,18 +42,31 @@ function($httpParamSerializerProvider) {
         }
         return data;
       },
-      transformData: function (filter, dateFields, strFormat, data) {
-        if (angular.isObject(data)) {
+      transformDataReq: function (angularFilter, dateFields, strFormat, obj) {
+        if (angular.isObject(obj)) {
           var i;
-          var o = angular.copy(data);
+          var o = angular.copy(obj);
           for (i=0; i<dateFields.length; i++) {
-            if (data.hasOwnProperty(dateFields[i])) {
-              o[dateFields[i]] = filter('date')(data[dateFields[i]], strFormat);
+            if (obj.hasOwnProperty(dateFields[i])) {
+              o[dateFields[i]] = angularFilter('date')(obj[dateFields[i]], strFormat);
             }
           }
           return $httpParamSerializerProvider.$get()(o);
         }
-        return data;
+        return obj;
+      },
+      transformDataResp: function(dateFields, obj) {
+        if (angular.isObject(obj)) {
+          var i;
+          for (i=0; i<dateFields.length; i++) {
+            if (obj.hasOwnProperty(dateFields[i])) {
+              var vet = obj[dateFields[i]].split('-');
+              var month = parseInt(vet[1])-1;
+              obj[dateFields[i]] = new Date(vet[0], month, vet[2]);
+            }
+          }
+        }
+        return obj;
       }
     }
   };
