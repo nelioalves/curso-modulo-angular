@@ -1,0 +1,26 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">Exclusão</div>
+				<div class="panel-body">
+					<ul ng-init="get()">
+						<li><strong>Id:</strong>{{item.id}}</li>
+						<li><strong>Name:</strong>{{item.name}}</li>
+						<li><strong>Status:</strong>{{item.status}}</li>
+						<li><strong>Projeto:</strong>{{item.project_id}}</li>
+					</ul>
+
+					<div class="form-group">
+						<div class="col-md-6 col-md-offset-4">
+							<button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+
+							<button type="button" class="btn btn-danger" ng-click="remove()">Excluir</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

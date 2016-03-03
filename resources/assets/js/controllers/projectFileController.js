@@ -25,7 +25,7 @@ function($scope, $location, $routeParams, appConfig, Url, Upload, ProjectFile) {
 	    	{id: $routeParams.id}, // ATENCAO
 			function(value, responseHeaders) {
                 if (checkServiceError(value[0])) {
-                	$location.path('/home');
+                	$location.path('/projects');
                 }
 			},
 			function(httpResponse) {

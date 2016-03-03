@@ -19,7 +19,9 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 	    $scope.items = Project.query(
 	    	{}, // ATENCAO
 			function(value, responseHeaders) {
-                checkServiceError(value[0]);
+                if (checkServiceError(value[0])) {
+                	$location.path('/home');
+                }
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -34,7 +36,9 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 		$scope.item = Project.get(
 			{id: $routeParams.id}, // ATENCAO
 			function(value, responseHeaders) {
-                checkServiceError(value);
+                if (checkServiceError(value)) {
+                	$location.path('/projects');
+                }
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -48,9 +52,8 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 		$scope.item.$save(
 			{},
 			function(value, responseHeaders) {
-				if (!checkServiceError(value)) {
-					$location.path('/projects'); // ATENCAO
-				}
+				checkServiceError(value);
+				$location.path('/projects'); // ATENCAO
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -64,9 +67,8 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 			{id: $scope.item.id}, 
 			$scope.item, 
 			function(value, responseHeaders) {
-				if (!checkServiceError(value)) {
-					$location.path('/projects'); // ATENCAO
-				}
+				checkServiceError(value);
+				$location.path('/projects'); // ATENCAO
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -79,9 +81,8 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 		$scope.item.$delete(
 			{},
 			function(value, responseHeaders) {
-				if (!checkServiceError(value)) {
-					$location.path('/projects'); // ATENCAO
-				}
+				checkServiceError(value);
+				$location.path('/projects'); // ATENCAO
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);

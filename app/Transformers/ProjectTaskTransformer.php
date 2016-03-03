@@ -15,6 +15,7 @@ class ProjectTaskTransformer extends TransformerAbstract {
 			'start_date' => $task->start_date,
 			'due_date' => $task->due_date,
 			'status' => $task->status,
+			'project_id' => $task->project_id,
 		];
 	}
 }

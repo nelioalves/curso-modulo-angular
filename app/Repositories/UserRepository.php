@@ -6,5 +6,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 
 interface UserRepository extends RepositoryInterface {
 
-    public function presenter();
+//    public function presenter();
 }

@@ -1,0 +1,83 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">Edição</div>
+				<div class="panel-body">
+
+					<form class="form-horizontal" name="form" role="form" method="POST" ng-submit="update()" ng-init="get()">
+						
+						<div class="form-group" ng-class="{'has-error': !form.name.$valid && form.name.$touched}">
+							<label class="col-md-4 control-label">Name</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="name" ng-model="item.name" required>
+								<div ng-messages="form.name.$error" class="help-block" ng-show="form.name.$touched">
+									<div ng-message="required">Campo obrigatório</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group" ng-class="{'has-error': !form.start_date.$valid && form.start_date.$touched}">
+							<label class="col-md-4 control-label">Start date</label>
+
+						    <div class="col-md-6">
+					            <p class="input-group">
+					              <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="item.start_date" name="start_date" is-open="start_date_popup.opened" close-text="Close" />
+					              <span class="input-group-btn">
+					                <button type="button" class="btn btn-default" ng-click="start_date_open()"><i class="glyphicon glyphicon-calendar"></i></button>
+					              </span>
+					            </p>
+
+					            <!--
+								<input type="date" class="form-control" name="due_date" ng-model="item.due_date" required> 
+								-->
+								<div ng-messages="form.due_date.$error" class="help-block" ng-show="form.due_date.$touched">
+									<div ng-message="required">Campo obrigatório</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group" ng-class="{'has-error': !form.due_date.$valid && form.due_date.$touched}">
+							<label class="col-md-4 control-label">Due date</label>
+
+						    <div class="col-md-6">
+					            <p class="input-group">
+					              <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="item.due_date" name="due_date" is-open="due_date_popup.opened" close-text="Close" />
+					              <span class="input-group-btn">
+					                <button type="button" class="btn btn-default" ng-click="due_date_open()"><i class="glyphicon glyphicon-calendar"></i></button>
+					              </span>
+					            </p>
+
+					            <!--
+								<input type="date" class="form-control" name="due_date" ng-model="item.due_date" required> 
+								-->
+								<div ng-messages="form.due_date.$error" class="help-block" ng-show="form.due_date.$touched">
+									<div ng-message="required">Campo obrigatório</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group" ng-class="{'has-error': !form.status.$valid && form.status.$touched}">
+							<label class="col-md-4 control-label">Status</label>
+							<div class="col-md-6">
+								<select class="form-control" name="status" ng-model="item.status" ng-options="o.key as o.value for o in status" required>
+									<option value="">-- Selecione o status --</option>
+								</select>
+								<div ng-messages="form.status.$error" class="help-block" ng-show="form.status.$touched">
+									<div ng-message="required">Campo obrigatório</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<button type="submit" class="btn btn-primary">Atualizar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

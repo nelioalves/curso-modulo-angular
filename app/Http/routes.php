@@ -43,12 +43,12 @@ Route::group(['middleware'=>'oauth'], function() {
 	// Rotas relacionadas a ProjectTask
 
 	Route::group(['middleware'=>'check-project-member'], function() {
+		Route::post('project/task', 'ProjectTaskController@store');
 		Route::get('project/task/{project}', 'ProjectTaskController@index');
 		Route::get('project/task/{project}/{task}', 'ProjectTaskController@show');
 	});
 
 	Route::group(['middleware'=>'check-task-member'], function() {
-		Route::post('project/task', 'ProjectTaskController@store');
 		Route::delete('project/task/{task}', 'ProjectTaskController@destroy');
 		Route::put('project/task/{task}', 'ProjectTaskController@update');
 	});
@@ -93,6 +93,8 @@ Route::group(['middleware'=>'oauth'], function() {
 	});
 
 	Route::get('user/authenticated', 'UserController@authenticated');
+
+	Route::resource('user', 'UserController', ['except'=>['create', 'edit']]);
 
 });
 

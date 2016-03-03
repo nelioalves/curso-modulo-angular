@@ -21,6 +21,12 @@ function($httpParamSerializerProvider) {
         {key: 3, value: 'Concluído'}
       ] 
     },
+    projectTask: {
+      status: [
+        {key: 1, value: 'Incompleta'},
+        {key: 2, value: 'Completa'}
+      ] 
+    },
     urls: {
       projectFile: '/project/file/{{id}}/{{idFile}}'
     },
@@ -47,7 +53,7 @@ function($httpParamSerializerProvider) {
           var i;
           var o = angular.copy(obj);
           for (i=0; i<dateFields.length; i++) {
-            if (obj.hasOwnProperty(dateFields[i])) {
+            if (obj.hasOwnProperty(dateFields[i]) && obj[dateFields[i]] != null) {
               o[dateFields[i]] = angularFilter('date')(obj[dateFields[i]], strFormat);
             }
           }
@@ -59,7 +65,7 @@ function($httpParamSerializerProvider) {
         if (angular.isObject(obj)) {
           var i;
           for (i=0; i<dateFields.length; i++) {
-            if (obj.hasOwnProperty(dateFields[i])) {
+            if (obj.hasOwnProperty(dateFields[i]) && obj[dateFields[i]] != null) {
               var vet = obj[dateFields[i]].split('-');
               var month = parseInt(vet[1])-1;
               obj[dateFields[i]] = new Date(vet[0], month, vet[2]);
@@ -165,6 +171,26 @@ app.config([
       .when('/project/:id/notes/:idNote', {
           templateUrl: 'build/views/projectNote/show.html',
           controller: 'ProjectNoteController'
+      })
+      .when('/project/:id/tasks', {
+          templateUrl: 'build/views/projectTask/list.html',
+          controller: 'ProjectTaskController'
+      })
+      .when('/project/:id/tasks/new', {
+          templateUrl: 'build/views/projectTask/new.html',
+          controller: 'ProjectTaskController'
+      })
+      .when('/project/:id/tasks/:idTask/edit', {
+          templateUrl: 'build/views/projectTask/edit.html',
+          controller: 'ProjectTaskController'
+      })
+      .when('/project/:id/tasks/:idTask/remove', {
+          templateUrl: 'build/views/projectTask/remove.html',
+          controller: 'ProjectTaskController'
+      })
+      .when('/project/:id/tasks/:idTask', {
+          templateUrl: 'build/views/projectTask/show.html',
+          controller: 'ProjectTaskController'
       })
       .when('/project/:id/files', {
           templateUrl: 'build/views/projectFile/list.html',
