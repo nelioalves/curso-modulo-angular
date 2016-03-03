@@ -94,6 +94,7 @@
 		<script src="{{ asset('build/js/controllers/projectNoteController.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/projectFileController.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/projectTaskController.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/controllers/projectMemberController.js') }}" type="text/javascript"></script>
 
 		<script src="{{ asset('build/js/controllers/ui-datepicker.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/ui-typeahead.js') }}" type="text/javascript"></script>
@@ -112,6 +113,7 @@
 		<script src="{{ asset('build/js/services/projectNote.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/projectFile.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/projectTask.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/services/projectMember.js') }}" type="text/javascript"></script>
 
 	@else
 		<script src="{{ elixir('js/all.js') }}" type="text/javascript"></script>

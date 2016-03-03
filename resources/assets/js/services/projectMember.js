@@ -1,12 +1,10 @@
 angular.module('app.services')
-.service('User', ['$resource', 'appConfig', function($resource, appConfig){
+.service('ProjectMember', ['$resource', 'appConfig', 
+function($resource, appConfig){
 	return $resource(
-		appConfig.baseUrl + '/user', 
-		{}, 
+		appConfig.baseUrl + '/project/:id/member/:idMember', 
+		{id: '@id', idMember: '@idMember'}, 
 		{
-			update: {
-				method: 'PUT'
-			},
 			query: {
 				method: 'GET',
 				isArray: true,
@@ -17,10 +15,6 @@ angular.module('app.services')
 					}
 					return resp;
 				}
-			},
-			authenticated: {
-				url: appConfig.baseUrl + '/user/authenticated',
-				method: 'GET'
 			}
 		}
 	);

@@ -50,6 +50,12 @@ class ProjectMemberService {
     public function create(array $data) {
         try {
             $this->validator->with($data)->passesOrFail();
+
+            $aux = $this->repository->skipPresenter()->findWhere(['user_id'=>$data['user_id'], 'project_id'=>$data['project_id']]);
+            if (count($aux) > 0) {
+                return Errors::basic("Falha. Este usuario ja eh membro deste projeto");
+            }            
+
             return $this->repository->create($data);
         } catch (ValidatorException $e) {
             return Errors::basic($e->getMessageBag());

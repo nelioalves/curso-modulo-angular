@@ -1,22 +1,21 @@
 angular.module('app.controllers')
-.controller('ProjectTaskController', 
-['$scope', '$location', '$routeParams', 'appConfig', 'ProjectTask', 
-function($scope, $location, $routeParams, appConfig, ProjectTask) {
+.controller('ProjectMemberController', 
+['$scope', '$location', '$routeParams', 'ProjectMember', 'User', 
+function($scope, $location, $routeParams, ProjectMember, User) {
 
 	$scope.cancel = function() {
 		var id = $scope.item.project_id;
-		$location.path('/project/'+id+'/tasks'); // ATENCAO
+		$location.path('/project/'+id+'/members'); // ATENCAO
 	};
 
 	$scope.new = function() {
-		$scope.item = new ProjectTask();
-		$scope.status = appConfig.projectTask.status; // ATENCAO
+		$scope.item = new ProjectMember();
 		$scope.item.project_id = $routeParams.id; // ATENCAO
 	};
 
 	$scope.all = function() {
 		$scope.father_id = $routeParams.id; // ATENCAO
-	    $scope.items = ProjectTask.query(
+	    $scope.items = ProjectMember.query(
 	    	{id: $routeParams.id,
 			orderBy: 'id',
 			sortedBy: 'desc'}, // ATENCAO
@@ -34,28 +33,12 @@ function($scope, $location, $routeParams, appConfig, ProjectTask) {
 
 	$scope.get = function() {
 		var id = $routeParams.id; // ATENCAO (salva o id do projeto)
-		$scope.status = appConfig.projectTask.status; // ATENCAO
-		$scope.item = ProjectTask.get(
-			{id: $routeParams.id, idTask: $routeParams.idTask}, // ATENCAO
+		$scope.item = ProjectMember.get(
+			{id: $routeParams.id, idMember: $routeParams.idMember}, // ATENCAO
 			function(value, responseHeaders) {
                 if (checkServiceError(value)) {
-                	$location.path('/project/'+id+'/tasks');
+                	$location.path('/project/'+id+'/members');
                 }
-			},
-			function(httpResponse) {
-				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
-				console.log(httpResponse);
-			}
-		);
-	};
-
-	$scope.save = function() {
-		var id = $scope.item.project_id; // ATENCAO (salva o id do projeto)
-		$scope.item.$save(
-			{},
-			function(value, responseHeaders) {
-                checkServiceError(value);
-               	$location.path('/project/'+id+'/tasks');
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -66,9 +49,8 @@ function($scope, $location, $routeParams, appConfig, ProjectTask) {
 
 	$scope.quickSave = function() {
 		var id = $scope.item.project_id; // ATENCAO (salva o id do projeto)
-		$scope.item.status = appConfig.projectTask.status[0].key;
 		$scope.item.$save(
-			{},
+			{id: $routeParams.id},
 			function(value, responseHeaders) {
                 checkServiceError(value);
                	$scope.all();
@@ -81,29 +63,13 @@ function($scope, $location, $routeParams, appConfig, ProjectTask) {
 		);
 	};
 
-	$scope.update = function() {
-		var id = $scope.item.project_id; // ATENCAO
-		ProjectTask.update(
-			{id: $scope.item.id}, 
-			$scope.item, 
-			function(value, responseHeaders) {
-                checkServiceError(value);
-               	$location.path('/project/'+id+'/tasks');
-			},
-			function(httpResponse) {
-				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
-				console.log(httpResponse);
-			}
-		);
-	};
-
 	$scope.remove = function() {
 		var id = $scope.item.project_id; // ATENCAO (salva o id pra montar a url depois)
 		$scope.item.$delete(
-			{},
+			{id: $routeParams.id, idMember: $routeParams.idMember},
 			function(value, responseHeaders) {
                 checkServiceError(value);
-               	$location.path('/project/'+id+'/tasks');
+               	$location.path('/project/'+id+'/members');
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -112,24 +78,25 @@ function($scope, $location, $routeParams, appConfig, ProjectTask) {
 		);
 	};
 
-
 	//---------------------------------------------
-	// Datepicker:
+	// Typeahead:
 
-	$scope.due_date_popup = {
-	    opened: false
+	$scope.formatName = function(obj) {
+		if (obj) {
+			return obj.name;
+		}
+		return '';
 	};
 
-	$scope.due_date_open = function() {
-	    $scope.due_date_popup.opened = true;
+	$scope.getUsers = function(name) {
+		return User.query({
+			search: name,
+			searchFields: 'name:like'
+		}).$promise;
 	};
 
-	$scope.start_date_popup = {
-	    opened: false
-	};
-
-	$scope.start_date_open = function() {
-	    $scope.start_date_popup.opened = true;
+	$scope.selectUser = function(obj) {
+		$scope.item.user_id = obj.id;
 	};
 
 }]);

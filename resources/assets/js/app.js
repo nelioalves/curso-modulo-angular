@@ -192,6 +192,14 @@ app.config([
           templateUrl: 'build/views/projectTask/show.html',
           controller: 'ProjectTaskController'
       })
+      .when('/project/:id/members', {
+          templateUrl: 'build/views/projectMember/list.html',
+          controller: 'ProjectMemberController'
+      })
+      .when('/project/:id/members/:idMember/remove', {
+          templateUrl: 'build/views/projectMember/remove.html',
+          controller: 'ProjectMemberController'
+      })
       .when('/project/:id/files', {
           templateUrl: 'build/views/projectFile/list.html',
           controller: 'ProjectFileController'
