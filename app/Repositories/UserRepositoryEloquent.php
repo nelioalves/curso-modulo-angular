@@ -16,9 +16,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository {
 		return User::class;
 	}
 
-//    public function presenter() {
-//        return \CodeProject\Presenters\UserPresenter::class;
-//    }
+    public function presenter() {
+        return \CodeProject\Presenters\UserPresenter::class;
+    }
 
     /**
      * Boot up the repository, pushing criteria

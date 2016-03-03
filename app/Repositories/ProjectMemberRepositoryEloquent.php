@@ -31,6 +31,10 @@ class ProjectMemberRepositoryEloquent extends BaseRepository implements ProjectM
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function presenter() {
+        return \CodeProject\Presenters\ProjectMemberPresenter::class;
+    }
+
     // este metodo foi colocado aqui porque eu nao consegui instanciar um 
     // ProjectMemberRepository dentro de ProjectRepository
     public function projectsOfWhichIsMember($user_id) {

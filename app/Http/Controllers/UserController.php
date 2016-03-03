@@ -23,4 +23,24 @@ class UserController extends Controller
     public function authenticated() {
     	return $this->service->authenticated();
     }
+
+    public function index() {
+        return $this->service->all();
+    }
+
+    public function store(Request $request) {
+        return $this->service->create($request->all());
+    }
+
+    public function show($id) {
+        return $this->service->find($id);
+    }
+
+    public function destroy($id) {
+        return $this->service->delete($id);
+    }
+
+    public function update(Request $request, $id) {
+        return $this->service->update($request->all(), $id);
+    }
 }

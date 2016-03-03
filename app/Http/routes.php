@@ -68,14 +68,17 @@ Route::group(['middleware'=>'oauth'], function() {
 
 	// Rotas relacionadas a ProjectMember
 
+	// Atencao: o resource abaixo criaria o padrao project/{project}/member/{member} :
+	//Route::resource('project.member', 'ProjectMemberController', ['except'=>['create', 'edit', 'update']]);
+
 	Route::group(['middleware'=>'check-project-member'], function() {
-		Route::get('project/member/{project}', 'ProjectController@indexMembers');
-		Route::get('project/member/{project}/{member}', 'ProjectController@checkMember');
+		Route::get('project/{project}/member', 'ProjectMemberController@index');
+		Route::get('project/{project}/member/{member}', 'ProjectMemberController@show');
 	});
 
 	Route::group(['middleware'=>'check-project-owner'], function() {
-		Route::post('project/member/{project}', 'ProjectController@storeMember');
-		Route::delete('project/member/{project}/{member}', 'ProjectController@destroyMember');
+		Route::post('project/{project}/member', 'ProjectMemberController@store');
+		Route::delete('project/{project}/member/{member}', 'ProjectMemberController@destroy');
 	});
 
 	// Rotas relacionadas a Project

@@ -21,15 +21,9 @@ class ClientService {
     */
     protected $validator;
 
-    /**
-    * @var ProjectService
-    */
-    protected $projectService;
-
-    public function __construct(ClientRepository $repository, ClientValidator $validator, ProjectService $projectService) {
+    public function __construct(ClientRepository $repository, ClientValidator $validator) {
         $this->repository = $repository;
         $this->validator = $validator;
-        $this->projectService = $projectService;
     }
 
     public function create(array $data) {

@@ -36,19 +36,4 @@ class ProjectController extends Controller
         return $this->service->update($request->all(), $project_id);
     }
 
-    public function indexMembers($project_id) {
-        return $this->service->members($project_id);
-    }
-
-    public function checkMember($project_id, $member_id) {
-        return $this->service->isMember($project_id, $member_id);
-    }
-
-    public function storeMember(Request $request, $project_id) {
-        return $this->service->addMember($request->all(), $project_id);
-    }
-
-    public function destroyMember($project_id, $member_id) {
-        return $this->service->removeMember($project_id, $member_id);
-    }
 }
