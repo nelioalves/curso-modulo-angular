@@ -99,6 +99,8 @@ app.config([
     $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
     $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
+    $httpProvider.interceptors.push('oauthFixInterceptor');
+
     $routeProvider
       .when('/', {
           templateUrl: 'build/views/home.html',
@@ -255,8 +257,8 @@ app.config([
   }
 ]);
 
-app.run(['$rootScope', '$location', '$window', 'OAuth', '$location', 
-  function($rootScope, $location, $window, OAuth, $location) {
+app.run(['$rootScope', '$location', 'OAuth', '$location', 
+  function($rootScope, $location, OAuth, $location) {
 
     // Parametros da funcao: 
     // - dados do evento
@@ -270,6 +272,7 @@ app.run(['$rootScope', '$location', '$window', 'OAuth', '$location',
       }
     });
 
+    // oauth:error foi nos que criamos. Nao eh um evento predefinido.
     $rootScope.$on('oauth:error', function(event, rejection) {
       // Ignore `invalid_grant` error - should be catched on `LoginController`.
       if ('invalid_grant' === rejection.data.error) {
@@ -277,14 +280,15 @@ app.run(['$rootScope', '$location', '$window', 'OAuth', '$location',
       }
 
       // Refresh token when a `invalid_token` error occurs.
-      if ('invalid_token' === rejection.data.error) {
+      // MUDAMOS AQUI PARA access_denied
+      if ('access_denied' === rejection.data.error) {
         return OAuth.getRefreshToken();
       }
 
       // Redirect to `/login` with the `error_reason`.
       //$location.path('/login');
       //return $window.location.href = '/login';
-      return $window.location.href = '/login?error_reason=' + rejection.data.error;
+      return $location.path('/login');
     });
 }]);
 

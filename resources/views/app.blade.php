@@ -106,6 +106,7 @@
 		<script src="{{ asset('build/js/filters/dateBr.js') }}" type="text/javascript"></script>
 
 		<!-- SERVICES -->
+		<script src="{{ asset('build/js/services/oauthFixInterceptor.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/url.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/user.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/services/client.js') }}" type="text/javascript"></script>
