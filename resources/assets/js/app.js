@@ -245,7 +245,21 @@ app.config([
   }
 ]);
 
-app.run(['$rootScope', '$window', 'OAuth', '$location', function($rootScope, $window, OAuth, $location) {
+app.run(['$rootScope', '$location', '$window', 'OAuth', '$location', 
+  function($rootScope, $location, $window, OAuth, $location) {
+
+    // Parametros da funcao: 
+    // - dados do evento
+    // - proxima rota que o usuario quer acessar
+    // - rota atual (se a rota nao existir, vem como undefined)
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+      if (next.$$route.originalPath != '/login') {
+        if (!OAuth.isAuthenticated()) {
+          $location.path('login');
+        }
+      }
+    });
+
     $rootScope.$on('oauth:error', function(event, rejection) {
       // Ignore `invalid_grant` error - should be catched on `LoginController`.
       if ('invalid_grant' === rejection.data.error) {
