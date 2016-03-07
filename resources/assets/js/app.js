@@ -282,11 +282,20 @@ app.run(['$rootScope', '$location', '$http', 'OAuth',
       // Refresh token when a `invalid_token` error occurs.
       // MUDAMOS AQUI PARA access_denied
       if ('access_denied' === data.rejection.data.error) {
-        return OAuth.getRefreshToken().then(function(response){
-          return $http(data.rejection.config).then(function(response){
-            return data.deferred.resolve(response);
+        if (!$rootScope.isRefreshingToken) {
+          $rootScope.isRefreshingToken = true;
+          return OAuth.getRefreshToken().then(function(response){
+            $rootScope.isRefreshingToken = false;
+            return $http(data.rejection.config).then(function(response){
+              return data.deferred.resolve(response);
+            });
           });
-        });
+        }
+        else {
+          return $http(data.rejection.config).then(function(response){
+              return data.deferred.resolve(response);
+          });
+        }
       }
 
       // Redirect to `/login` with the `error_reason`.
