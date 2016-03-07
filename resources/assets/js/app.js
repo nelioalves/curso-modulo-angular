@@ -112,6 +112,16 @@ app.config([
           templateUrl: 'build/views/login.html',
           controller: 'LoginController'
       })
+      .when('/logout', {
+          resolve : {
+            logout: ['$location', 'OAuthToken', function($location, OAuthToken) {
+              OAuthToken.removeToken();
+              $location.path('/login');
+            }]
+          }
+          // Criamos o resolve e nao um controller separado por ser muito simples
+          // logout eh um objeto no escopo que foi criado
+      })
       .when('/clients', {
           templateUrl: 'build/views/client/list.html',
           controller: 'ClientController'
@@ -255,7 +265,7 @@ app.run(['$rootScope', '$location', '$window', 'OAuth', '$location',
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
       if (next.$$route.originalPath != '/login') {
         if (!OAuth.isAuthenticated()) {
-          $location.path('login');
+          $location.path('/login');
         }
       }
     });
