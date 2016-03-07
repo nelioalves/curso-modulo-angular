@@ -10,18 +10,21 @@ function oauthInterceptor($q, $rootScope, OAuthToken) {
             return config;
         },
         responseError: function responseError(rejection) {
+            var deferred = $q.defer();
+
             if (400 === rejection.status && rejection.data 
             	&& ("invalid_request" === rejection.data.error || "invalid_grant" === rejection.data.error)) {
                 OAuthToken.removeToken();
-                $rootScope.$emit("oauth:error", rejection);
+                $rootScope.$emit("oauth:error", {rejection: rejection, deferred: deferred});
             }
             // mudamos aqui para "access_denied"
             if (401 === rejection.status && rejection.data 
             	&& "access_denied" === rejection.data.error || rejection.headers("www-authenticate") 
             	&& 0 === rejection.headers("www-authenticate").indexOf("Bearer")) {
-                $rootScope.$emit("oauth:error", rejection);
+                $rootScope.$emit("oauth:error", {rejection: rejection, deferred: deferred});
             }
-            return $q.reject(rejection);
+            //return $q.reject(rejection);
+            return deferred.promise; // uma promessa pode ser tanto de erro quanto de sucesso
         }
     };
 }]);

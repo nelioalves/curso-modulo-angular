@@ -257,8 +257,8 @@ app.config([
   }
 ]);
 
-app.run(['$rootScope', '$location', 'OAuth', '$location', 
-  function($rootScope, $location, OAuth, $location) {
+app.run(['$rootScope', '$location', '$http', 'OAuth',  
+  function($rootScope, $location, $http, OAuth) {
 
     // Parametros da funcao: 
     // - dados do evento
@@ -273,16 +273,20 @@ app.run(['$rootScope', '$location', 'OAuth', '$location',
     });
 
     // oauth:error foi nos que criamos. Nao eh um evento predefinido.
-    $rootScope.$on('oauth:error', function(event, rejection) {
+    $rootScope.$on('oauth:error', function(event, data) {
       // Ignore `invalid_grant` error - should be catched on `LoginController`.
-      if ('invalid_grant' === rejection.data.error) {
+      if ('invalid_grant' === data.rejection.data.error) {
         return;
       }
 
       // Refresh token when a `invalid_token` error occurs.
       // MUDAMOS AQUI PARA access_denied
-      if ('access_denied' === rejection.data.error) {
-        return OAuth.getRefreshToken();
+      if ('access_denied' === data.rejection.data.error) {
+        return OAuth.getRefreshToken().then(function(response){
+          return $http(data.rejection.config).then(function(response){
+            return data.deferred.resolve(response);
+          });
+        });
       }
 
       // Redirect to `/login` with the `error_reason`.
