@@ -1,4 +1,4 @@
-// Lembrete: o nome da diretiva vai virar um atributo html na forma project-file-download
+// Lembrete: o nome da diretiva vai virar um elemento html na forma project-file-download
 
 angular.module('app.directives')
 .directive('projectFileDownload', ['$timeout', 'appConfig', 'ProjectFile',

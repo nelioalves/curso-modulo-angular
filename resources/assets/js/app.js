@@ -2,7 +2,8 @@ var app = angular.module('app', [
   'ngRoute', 'angular-oauth2', 'app.controllers', 
   'app.services', 'app.filters', 'app.directives',
   'ngAnimate', 'ui.bootstrap.tpls', 'ui.bootstrap.typeahead', 
-  'ui.bootstrap.datepicker', 'ngFileUpload'
+  'ui.bootstrap.datepicker', 'ui.bootstrap.modal',
+  'ngFileUpload', 'http-auth-interceptor'
 ]);
 
 angular.module('app.controllers', ['ngMessages','angular-oauth2']);
@@ -257,8 +258,8 @@ app.config([
   }
 ]);
 
-app.run(['$rootScope', '$location', '$http', 'OAuth',  
-  function($rootScope, $location, $http, OAuth) {
+app.run(['$rootScope', '$location', '$http', '$uibModal', 'httpBuffer', 'OAuth',  
+  function($rootScope, $location, $http, $uibModal, httpBuffer, OAuth) {
 
     // Parametros da funcao: 
     // - dados do evento
@@ -282,19 +283,13 @@ app.run(['$rootScope', '$location', '$http', 'OAuth',
       // Refresh token when a `invalid_token` error occurs.
       // MUDAMOS AQUI PARA access_denied
       if ('access_denied' === data.rejection.data.error) {
-        if (!$rootScope.isRefreshingToken) {
-          $rootScope.isRefreshingToken = true;
-          return OAuth.getRefreshToken().then(function(response){
-            $rootScope.isRefreshingToken = false;
-            return $http(data.rejection.config).then(function(response){
-              return data.deferred.resolve(response);
-            });
+        httpBuffer.append(data.rejection.config, data.deferred);
+        if (!$rootScope.loginModalOpened) {
+          var modalInstance = $uibModal.open({
+            templateUrl: 'build/views/templates/loginModal.html',
+            controller: 'LoginModalController'
           });
-        }
-        else {
-          return $http(data.rejection.config).then(function(response){
-              return data.deferred.resolve(response);
-          });
+          $rootScope.loginModalOpened = true;
         }
       }
 
