@@ -22,9 +22,9 @@ function oauthInterceptor($q, $rootScope, OAuthToken) {
             	&& "access_denied" === rejection.data.error || rejection.headers("www-authenticate") 
             	&& 0 === rejection.headers("www-authenticate").indexOf("Bearer")) {
                 $rootScope.$emit("oauth:error", {rejection: rejection, deferred: deferred});
+                return deferred.promise; 
             }
-            //return $q.reject(rejection);
-            return deferred.promise; // uma promessa pode ser tanto de erro quanto de sucesso
+            return $q.reject(rejection);
         }
     };
 }]);

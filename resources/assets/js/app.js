@@ -100,6 +100,8 @@ app.config([
     $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
     $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
+    $httpProvider.interceptors.splice(0,1);
+    $httpProvider.interceptors.splice(0,1);
     $httpProvider.interceptors.push('oauthFixInterceptor');
 
     $routeProvider
@@ -248,6 +250,7 @@ app.config([
       grantPath: 'oauth/access_token'
     });
 
+    // Em producao este codigo deve ser retirado:
     OAuthTokenProvider.configure({
       name: 'token',
       options: {
@@ -291,6 +294,7 @@ app.run(['$rootScope', '$location', '$http', '$uibModal', 'httpBuffer', 'OAuth',
           });
           $rootScope.loginModalOpened = true;
         }
+        return;
       }
 
       // Redirect to `/login` with the `error_reason`.
