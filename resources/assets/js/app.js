@@ -42,7 +42,7 @@ function($httpParamSerializerProvider) {
         var headersGetter = headers();
         if (headersGetter['content-type']=='application/json' || headersGetter['content-type']=='application/json') {
           var dataJson = JSON.parse(data);
-          if (dataJson.hasOwnProperty('data')) {
+           if (dataJson.hasOwnProperty('data') && Object.keys(dataJson).length == 1) {
             dataJson = dataJson.data;
           }
           return dataJson;

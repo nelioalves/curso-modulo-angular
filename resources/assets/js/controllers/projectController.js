@@ -15,6 +15,27 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 		$scope.item.progress = 0; // ATENCAO
 	};
 
+	$scope.allPaginate = function() {
+	    Project.query(
+	    	{}, // ATENCAO
+			function(value, responseHeaders) {
+                if (checkServiceError(value[0])) {
+                	$location.path('/home');
+                }
+                else {
+	                $scope.items = value.data;
+	                $scope.itemsTotal = value.meta.pagination.total;
+	            }
+			},
+			function(httpResponse) {
+				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
+				console.log(httpResponse);
+			}
+	    );
+    };
+
+
+
 	$scope.all = function() {
 	    $scope.items = Project.query(
 	    	{}, // ATENCAO
@@ -90,6 +111,28 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 			}
 		);
 	};
+
+
+	//---------------------------------------------
+	// Pagination:
+
+	$scope.items = [];
+    $scope.itemsTotal = 0;
+    $scope.itemsPerPage = 25; // this should match however many results your API puts on one page
+
+    $scope.pagination = {
+        current: 1
+    };
+
+    $scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
+    };
+
+    function getResultsPage(pageNumber) {
+    	$scope.allPaginate();
+    }
+
+    getResultsPage(1);
 
 	//---------------------------------------------
 	// Datepicker:
