@@ -95,10 +95,10 @@ class ProjectService {
         }
     }
 
-    public function all() {
+    public function all($limit) {
         $user_id = \Authorizer::getResourceOwnerId();
 
-        return $this->repository->findOwner($user_id);
+        return $this->repository->findOwner($user_id, $limit);
 
 //        $ids = $this->projectMemberRepository->projectsOfWhichIsMember($user_id);
 //        return $this->repository->with(['client','owner'])->findWhereIn('id', $ids);

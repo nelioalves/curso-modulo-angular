@@ -16,8 +16,9 @@ class ProjectController extends Controller
         $this->service = $service;
     }
 
-    public function index() {
-        return $this->service->all();
+    public function index(Request $request) {
+        $limit = $request->query->get('limit');
+        return $this->service->all($limit);
     }
 
     public function store(Request $request) {

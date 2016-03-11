@@ -15,9 +15,9 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 		$scope.item.progress = 0; // ATENCAO
 	};
 
-	$scope.allPaginate = function() {
+	$scope.allPaginate = function(pageNumber) {
 	    Project.query(
-	    	{}, // ATENCAO
+	    	{page: pageNumber, limit: $scope.itemsPerPage}, // ATENCAO
 			function(value, responseHeaders) {
                 if (checkServiceError(value[0])) {
                 	$location.path('/home');
@@ -118,7 +118,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 
 	$scope.items = [];
     $scope.itemsTotal = 0;
-    $scope.itemsPerPage = 25; // this should match however many results your API puts on one page
+    $scope.itemsPerPage = 5; // this should match however many results your API puts on one page
 
     $scope.pagination = {
         current: 1
@@ -129,7 +129,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
     };
 
     function getResultsPage(pageNumber) {
-    	$scope.allPaginate();
+    	$scope.allPaginate(pageNumber);
     }
 
     getResultsPage(1);
