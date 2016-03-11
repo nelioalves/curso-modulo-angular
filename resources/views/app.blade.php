@@ -54,6 +54,7 @@
 		<!-- CONTROLLERS -->
 		<script src="{{ asset('build/js/controllers/controllerErrors.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/home.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/controllers/menu.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/login.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/loginModal.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/controllers/clientController.js') }}" type="text/javascript"></script>

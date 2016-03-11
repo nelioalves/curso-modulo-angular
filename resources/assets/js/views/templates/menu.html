@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" bs-navbar ng-controller="MenuController">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -7,31 +7,49 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#/">Início</a>
+			<a class="navbar-brand" ng-href="#/home">Code Project</a>
 		</div>
 
-		<div class="collapse navbar-collapse" id="navbar">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="#/clients">Client</a></li>
-				<li><a href="#/projects">Project</a></li>
+				<li data-match-route="/home"><a ng-href="#/home">Home</a></li>
+
+				<li class="dropdown" uib-dropdown data-match-route="/client.*">
+					<a ng-href="#" class="dropdown-toggle" data-toggle="dropdown" 
+					role="button" aria-expanded="false" uib-dropdown-toggle>
+					 	Client
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a ng-href="#/clients">Listagem</a></li>
+						<li><a ng-href="#/clients/new">Novo</a></li>
+					</ul>
+				</li>
+
+				<li class="dropdown" uib-dropdown data-match-route="/project.*">
+					<a ng-href="#" class="dropdown-toggle" data-toggle="dropdown" 
+					role="button" aria-expanded="false" uib-dropdown-toggle>
+					 	Project
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a ng-href="#/projects">Listagem</a></li>
+						<li><a ng-href="#/projects/new">Novo</a></li>
+					</ul>
+				</li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				@if(auth()->guest())
-					@if(!Request::is('auth/login'))
-						<li><a href="#/login">Login</a></li>
-					@endif
-					@if(!Request::is('auth/register'))
-						<li><a href="#/">Register</a></li>
-					@endif
-				@else
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> auth()->user()->name }} <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href=" url('/auth/logout') }}">Logout</a></li>
-						</ul>
-					</li>
-				@endif
+				<li class="dropdown" uib-dropdown>
+					<a ng-href="#" class="dropdown-toggle" data-toggle="dropdown" 
+					role="button" aria-expanded="false" uib-dropdown-toggle>
+					 	{{user.name}} 
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a ng-href="#/logout">Logout</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
