@@ -100,8 +100,8 @@ app.config([
     $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
     $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
-    $httpProvider.interceptors.splice(0,1);
-    $httpProvider.interceptors.splice(0,1);
+//    $httpProvider.interceptors.splice(0,1);
+//    $httpProvider.interceptors.splice(0,1);
     $httpProvider.interceptors.push('oauthFixInterceptor');
 
     $routeProvider
@@ -261,7 +261,7 @@ app.config([
   }
 ]);
 
-app.run(['$rootScope', '$location', '$http', '$uibModal', 'httpBuffer', 'OAuth',  
+app.run(['$rootScope', '$location', '$http', '$uibModal', 'httpBuffer', 'OAuth',
   function($rootScope, $location, $http, $uibModal, httpBuffer, OAuth) {
 
     // Parametros da funcao: 
@@ -276,31 +276,34 @@ app.run(['$rootScope', '$location', '$http', '$uibModal', 'httpBuffer', 'OAuth',
       }
     });
 
-    // oauth:error foi nos que criamos. Nao eh um evento predefinido.
     $rootScope.$on('oauth:error', function(event, data) {
-      // Ignore `invalid_grant` error - should be catched on `LoginController`.
-      if ('invalid_grant' === data.rejection.data.error) {
+
+      if ((data.hasOwnProperty('rejection') && 'invalid_request' === data.rejection.data.error) || (data.hasOwnProperty('data') && data.data.error === 'invalid_request')) {
         return;
       }
 
-      // Refresh token when a `invalid_token` error occurs.
-      // MUDAMOS AQUI PARA access_denied
-      if ('access_denied' === data.rejection.data.error) {
-        httpBuffer.append(data.rejection.config, data.deferred);
-        if (!$rootScope.loginModalOpened) {
-          var modalInstance = $uibModal.open({
-            templateUrl: 'build/views/templates/loginModal.html',
-            controller: 'LoginModalController'
+      else if (data.hasOwnProperty('rejection') && 'access_denied' === data.rejection.data.error) {
+
+        return OAuth.getRefreshToken().then(function(response){
+          return $http(data.rejection.config).then(function(response){
+            return data.deferred.resolve(response);
           });
-          $rootScope.loginModalOpened = true;
-        }
-        return;
+        },
+        function(response) {
+          httpBuffer.append(data.rejection.config, data.deferred);
+          if (!$rootScope.loginModalOpened) {
+            var modalInstance = $uibModal.open({
+              templateUrl: 'build/views/templates/loginModal.html',
+              controller: 'LoginModalController'
+             });
+            $rootScope.loginModalOpened = true;
+          }
+          return;
+        });
       }
 
-      // Redirect to `/login` with the `error_reason`.
-      //$location.path('/login');
-      //return $window.location.href = '/login';
-      return $location.path('/login');
+      else 
+        return $location.path('/login');
     });
 }]);
 
