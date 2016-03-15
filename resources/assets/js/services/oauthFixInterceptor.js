@@ -3,8 +3,8 @@ angular.module('app.services')
 function oauthInterceptor($q, $rootScope, OAuthToken) {
     return {
         request: function request(config) {
-            config.headers = config.headers || {};
-            if (!config.headers.hasOwnProperty("Authorization") && OAuthToken.getAuthorizationHeader()) {
+            if (OAuthToken.getAuthorizationHeader()) {
+                config.headers = config.headers || {};
                 config.headers.Authorization = OAuthToken.getAuthorizationHeader();
             }
             return config;

@@ -101,8 +101,8 @@ app.config([
     $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
     $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
-//    $httpProvider.interceptors.splice(0,1);
-//    $httpProvider.interceptors.splice(0,1);
+    $httpProvider.interceptors.splice(0,1); // angular-oauth2
+    $httpProvider.interceptors.splice(0,1); // http-auth-interceptor
     $httpProvider.interceptors.push('oauthFixInterceptor');
 
     $routeProvider
