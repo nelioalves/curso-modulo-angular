@@ -132,107 +132,133 @@ app.config([
       })
       .when('/clients', {
           templateUrl: 'build/views/client/list.html',
-          controller: 'ClientController'
+          controller: 'ClientController',
+          title: 'Clientes'
       })
       .when('/clients/new', {
           templateUrl: 'build/views/client/new.html',
-          controller: 'ClientController'
+          controller: 'ClientController',
+          title: 'Clientes'
       })
       .when('/clients/:id/edit', {
           templateUrl: 'build/views/client/edit.html',
-          controller: 'ClientController'
+          controller: 'ClientController',
+          title: 'Clientes'
       })
       .when('/clients/:id/remove', {
           templateUrl: 'build/views/client/remove.html',
-          controller: 'ClientController'
+          controller: 'ClientController',
+          title: 'Clientes'
       })
       .when('/clients/:id', {
           templateUrl: 'build/views/client/show.html',
-          controller: 'ClientController'
+          controller: 'ClientController',
+          title: 'Clientes'
       })
       .when('/projects', {
           templateUrl: 'build/views/project/list.html',
-          controller: 'ProjectController'
+          controller: 'ProjectController',
+          title: 'Projetos'
       })
       .when('/projects/new', {
           templateUrl: 'build/views/project/new.html',
-          controller: 'ProjectController'
+          controller: 'ProjectController',
+          title: 'Projetos'
       })
       .when('/projects/:id/edit', {
           templateUrl: 'build/views/project/edit.html',
-          controller: 'ProjectController'
+          controller: 'ProjectController',
+          title: 'Projetos'
       })
       .when('/projects/:id/remove', {
           templateUrl: 'build/views/project/remove.html',
-          controller: 'ProjectController'
+          controller: 'ProjectController',
+          title: 'Projetos'
       })
       .when('/projects/:id', {
           templateUrl: 'build/views/project/show.html',
-          controller: 'ProjectController'
+          controller: 'ProjectController',
+          title: 'Projetos'
       })
       .when('/project/:id/notes', {
           templateUrl: 'build/views/projectNote/list.html',
-          controller: 'ProjectNoteController'
+          controller: 'ProjectNoteController',
+          title: 'Notas de Projeto'
       })
       .when('/project/:id/notes/new', {
           templateUrl: 'build/views/projectNote/new.html',
-          controller: 'ProjectNoteController'
+          controller: 'ProjectNoteController',
+          title: 'Notas de Projeto'
       })
       .when('/project/:id/notes/:idNote/edit', {
           templateUrl: 'build/views/projectNote/edit.html',
-          controller: 'ProjectNoteController'
+          controller: 'ProjectNoteController',
+          title: 'Notas de Projeto'
       })
       .when('/project/:id/notes/:idNote/remove', {
           templateUrl: 'build/views/projectNote/remove.html',
-          controller: 'ProjectNoteController'
+          controller: 'ProjectNoteController',
+          title: 'Notas de Projeto'
       })
       .when('/project/:id/notes/:idNote', {
           templateUrl: 'build/views/projectNote/show.html',
-          controller: 'ProjectNoteController'
+          controller: 'ProjectNoteController',
+          title: 'Notas de Projeto'
       })
       .when('/project/:id/tasks', {
           templateUrl: 'build/views/projectTask/list.html',
-          controller: 'ProjectTaskController'
+          controller: 'ProjectTaskController',
+          title: 'Tarefas de Projeto'
       })
       .when('/project/:id/tasks/new', {
           templateUrl: 'build/views/projectTask/new.html',
-          controller: 'ProjectTaskController'
+          controller: 'ProjectTaskController',
+          title: 'Tarefas de Projeto'
       })
       .when('/project/:id/tasks/:idTask/edit', {
           templateUrl: 'build/views/projectTask/edit.html',
-          controller: 'ProjectTaskController'
+          controller: 'ProjectTaskController',
+          title: 'Tarefas de Projeto'
       })
       .when('/project/:id/tasks/:idTask/remove', {
           templateUrl: 'build/views/projectTask/remove.html',
-          controller: 'ProjectTaskController'
+          controller: 'ProjectTaskController',
+          title: 'Tarefas de Projeto'
       })
       .when('/project/:id/tasks/:idTask', {
           templateUrl: 'build/views/projectTask/show.html',
-          controller: 'ProjectTaskController'
+          controller: 'ProjectTaskController',
+          title: 'Tarefas de Projeto'
       })
       .when('/project/:id/members', {
           templateUrl: 'build/views/projectMember/list.html',
-          controller: 'ProjectMemberController'
+          controller: 'ProjectMemberController',
+          title: 'Membros de Projeto'
       })
       .when('/project/:id/members/:idMember/remove', {
           templateUrl: 'build/views/projectMember/remove.html',
-          controller: 'ProjectMemberController'
+          controller: 'ProjectMemberController',
+          title: 'Membros de Projeto'
       })
       .when('/project/:id/files', {
           templateUrl: 'build/views/projectFile/list.html',
-          controller: 'ProjectFileController'
+          controller: 'ProjectFileController',
+          title: 'Arquivos de Projeto'
       })
       .when('/project/:id/files/new', {
           templateUrl: 'build/views/projectFile/new.html',
-          controller: 'ProjectFileController'
+          controller: 'ProjectFileController',
+          title: 'Arquivos de Projeto'
       })
       .when('/project/:id/files/:idFile/edit', {
           templateUrl: 'build/views/projectFile/edit.html',
-          controller: 'ProjectFileController'
+          controller: 'ProjectFileController',
+          title: 'Arquivos de Projeto'
       })
       .when('/project/:id/files/:idFile/remove', {
           templateUrl: 'build/views/projectFile/remove.html',
-          controller: 'ProjectFileController'
+          controller: 'ProjectFileController',
+          title: 'Arquivos de Projeto'
       })
 
 
@@ -278,6 +304,11 @@ app.run(['$rootScope', '$location', '$http', '$uibModal', 'httpBuffer', 'OAuth',
         }
       }
     });
+
+    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+      $rootScope.pageTitle = current.$$route.title;
+    });
+
 
     $rootScope.$on('oauth:error', function(event, data) {
 
