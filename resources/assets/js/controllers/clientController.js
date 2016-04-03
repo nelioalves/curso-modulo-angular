@@ -11,6 +11,10 @@ function($scope, $location, $routeParams, Client) {
 		$scope.item = new Client();
 	};
 
+	$scope.showItem = function(item) {
+		$scope.item = item;
+	};
+
 	$scope.allPaginate = function() {
 	    Client.query(
 	    	{
@@ -25,6 +29,9 @@ function($scope, $location, $routeParams, Client) {
                 }
                 else {
 	                $scope.items = value.data;
+	                if ($scope.items.length > 0) {
+	                	$scope.showItem($scope.items[0]);
+	                }
 	                //$scope.itemsTotal = value.meta.pagination.total;
 	            }
 			},
@@ -36,12 +43,15 @@ function($scope, $location, $routeParams, Client) {
 	};
 
 	$scope.all = function() {
-	    $scope.items = Client.query(
+	    Client.query(
 	    	{},
 			function(value, responseHeaders) {
                 if (checkServiceError(value[0])) {
                 	$location.path('/home');
                 }
+                else {
+	                $scope.items = value.data;
+	            }
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
