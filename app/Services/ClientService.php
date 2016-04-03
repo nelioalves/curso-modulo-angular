@@ -50,8 +50,8 @@ class ClientService {
         }
     }
 
-    public function all() {
-        return $this->repository->all();
+    public function all($limit) {
+        return $this->repository->paginate($limit);
     }
 
     public function find($id) {

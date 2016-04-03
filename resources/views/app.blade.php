@@ -6,10 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 	@if(Config::get('app.debug'))
-		<link href="{{ asset('build/css/app.css') }}" rel="stylesheet" type="text/css">
-		<link href="{{ asset('build/css/components.css') }}" rel="stylesheet" type="text/css">
-		<link href="{{ asset('build/css/flaticon.css') }}" rel="stylesheet" type="text/css">
 		<link href="{{ asset('build/css/font-awesome.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('build/css/flaticon.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('build/css/components.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('build/css/app.css') }}" rel="stylesheet" type="text/css">
 	@else
 		<link href="{{ elixir('css/all.css') }}" rel="stylesheet" type="text/css">
 	@endif

@@ -11,6 +11,30 @@ function($scope, $location, $routeParams, Client) {
 		$scope.item = new Client();
 	};
 
+	$scope.allPaginate = function() {
+	    Client.query(
+	    	{
+	    		page: 1,
+				orderBy: 'created_at',
+				sortedBy: 'desc',
+				limit: 8	    	
+			}, // ATENCAO
+			function(value, responseHeaders) {
+                if (checkServiceError(value[0])) {
+                	$location.path('/home');
+                }
+                else {
+	                $scope.items = value.data;
+	                //$scope.itemsTotal = value.meta.pagination.total;
+	            }
+			},
+			function(httpResponse) {
+				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
+				console.log(httpResponse);
+			}
+	    );
+	};
+
 	$scope.all = function() {
 	    $scope.items = Client.query(
 	    	{},
