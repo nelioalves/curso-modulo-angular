@@ -71,6 +71,7 @@
 		<script src="{{ asset('build/js/directives/loadTemplate.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/directives/loginForm.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('build/js/directives/projectFileDownload.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('build/js/directives/menu-activated.js') }}" type="text/javascript"></script>
 
 		<!-- FILTERS -->
 		<script src="{{ asset('build/js/filters/dateBr.js') }}" type="text/javascript"></script>

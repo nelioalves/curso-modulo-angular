@@ -90,8 +90,10 @@ function($httpParamSerializerProvider) {
 // config so aceita provider, portanto criamos um provider acima (ATENCAO AO PADRAO DE 
   //NOMES: o provider chama 'appConfig' e aqui ele eh referenciado como 'appConfigProvider')
 app.config([
-  '$routeProvider', '$httpProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
-  function($routeProvider, $httpProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider) {
+  '$routeProvider', '$httpProvider', 'OAuthProvider', 
+  'OAuthTokenProvider', 'appConfigProvider', 
+  function($routeProvider, $httpProvider, OAuthProvider, 
+    OAuthTokenProvider, appConfigProvider) {
 
     // Por causa da adaptacao de datas que fizemos, precisamos configurar a aplicacao para aceitar
     // os dados do post e put na forma de urlencoded
