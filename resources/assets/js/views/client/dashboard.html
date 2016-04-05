@@ -3,13 +3,14 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="boxed-manager">
-                    <div class="boxed-manager-menu" ng-init="allPaginate()">
+                    <div class="boxed-manager-menu" ng-init="allPaginate(1)">
+                        
                         <ul class="boxed-manager-menu-nav">
                             <li class="boxed-manager-menu-nav-header">
                                 <h3 class="h4">
                                     Clientes
-
                                     <div class="btn-group pull-right">
+                                        <!--
                                         <label class="select-styled select-styled-default select-styled-sm">
                                             <select>
                                                 <option selected="selected">A</option>
@@ -19,14 +20,14 @@
                                                 <option>E</option>
                                                 <option>F</option>
                                             </select>
-                                        </label>
+                                        </label> -->
                                         <a ng-href="#/clients/new" class="btn btn-default btn-sm">
                                             <i class="fa fa-plus"></i>
                                         </a>
-                                    </div>
+                                    </div> 
                                 </h3>
                             </li>
-                            <li class="boxed-manager-menu-nav-item" ng-repeat="o in items">
+                            <li class="boxed-manager-menu-nav-item" dir-paginate="o in items | itemsPerPage: itemsPerPage" total-items="itemsTotal" current-page="pagination.current">
                                 <a href="javascript:void(0)" ng-click="showItem(o)">
                                     <header>
                                         <h4 class="h4 text-boulder">{{o.name}}</h4>
@@ -35,6 +36,7 @@
                                 </a>
                             </li>
                         </ul>
+                         <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
                     </div>
                     <div class="boxed-manager-main boxed-manager-main-xlg">
                         <div class="boxed-manager-main-header">
@@ -53,6 +55,9 @@
                         </div>
                         <div class="boxed-manager-main-body">
                             <div class="row">
+                                <div class="col-xs-12">
+                                    <h4 class="h4 text-boulder">{{item.name}}</h4>
+                                </div>
                                 <div class="col-xs-6">
                                     <p>
                                         <i class="icon-inline flaticon-gps36"></i> {{item.address}}
@@ -60,13 +65,15 @@
                                     <p>
                                         <i class="icon-inline fa fa-envelope-o"></i> {{item.email}}
                                     </p>
+                                    <!--
                                     <p>
                                         <i class="icon-inline fa fa-skype"></i> oreaseca
-                                    </p>
+                                    </p> -->
                                     <p>
                                         <i class="icon-inline flaticon-telephone60"></i> {{item.phone}}
                                     </p>
                                 </div>
+                                <!--
                                 <div class="col-xs-6">
                                     <p>
                                         <i class="icon-inline fa fa-twitter"></i> @codeeducation
@@ -80,7 +87,7 @@
                                     <p>
                                         <i class="icon-inline fa fa-search"></i> www.code.education
                                     </p>
-                                </div>
+                                </div> -->
                             </div>
 
                             <br/>

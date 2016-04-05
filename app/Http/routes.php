@@ -25,6 +25,7 @@ Route::group(['middleware'=>'oauth'], function() {
 	// Rotas relacionadas a Client
 
 	Route::resource('client', 'ClientController', ['except'=>['create', 'edit']]);
+	Route::get('clientsAll', 'ClientController@indexNoPaginate');
 
 	// Rotas relacionadas a ProjectFile
 

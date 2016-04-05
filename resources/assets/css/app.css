@@ -2239,6 +2239,11 @@
       border-bottom-color: transparent; }
 
 /* -- Boxed Manager */
+
+.section-padd {
+  padding: 8px;
+}
+
 /* Task list */
 .task-list .task-list-title {
   font-weight: bold;

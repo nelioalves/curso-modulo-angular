@@ -54,6 +54,10 @@ class ClientService {
         return $this->repository->paginate($limit);
     }
 
+    public function allNoPaginate() {
+        return $this->repository->all();
+    }
+
     public function find($id) {
         if (is_null(Client::find($id))) {
             return Errors::invalidId($id);

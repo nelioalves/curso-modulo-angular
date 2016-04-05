@@ -1,14 +1,34 @@
 angular.module('app.controllers')
 .controller('ProjectController', 
-['$scope', '$location', '$cookies', '$routeParams', 'appConfig', 'Project', 'Client', 
-function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) {
+['$scope', '$location', '$cookies', '$routeParams', 'appConfig', 'Project', 'Client2', 'ProjectTask', 
+function($scope, $location, $cookies, $routeParams, appConfig, Project, Client2, ProjectTask) {
+
+	$scope.finalizarTarefa = function(task) {
+		task.status = 2;
+		ProjectTask.update(
+			{id: task.id}, 
+			task, 
+			function(value, responseHeaders) {
+                //checkServiceError(value);
+               	//$location.path('/project/'+id+'/tasks');
+			},
+			function(httpResponse) {
+				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
+				console.log(httpResponse);
+			}
+		);
+	}
 
 	$scope.cancel = function() {
 		$location.path('/projects'); // ATENCAO
 	};
 
+	$scope.showItem = function(item) {
+		$scope.item = item;
+	};
+
 	$scope.new = function() {
-		$scope.clients = Client.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
+		//$scope.clients = Client2.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
 		$scope.status = appConfig.project.status; // ATENCAO
 		$scope.item = new Project(); 
 		$scope.item.due_date = new Date();
@@ -24,6 +44,9 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
                 }
                 else {
 	                $scope.items = value.data;
+	                if ($scope.items.length > 0) {
+	                	$scope.showItem($scope.items[0]);
+	                }
 	                $scope.itemsTotal = value.meta.pagination.total;
 	            }
 			},
@@ -52,7 +75,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
     };
 
 	$scope.get = function() {
-		$scope.clients = Client.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
+		//$scope.clients = Client2.query(); // ATENCAO (removido pq agora nao estamos mais trabalhando com a lista estatica de clientes)
 		$scope.status = appConfig.project.status; // ATENCAO
 		$scope.item = Project.get(
 			{id: $routeParams.id}, // ATENCAO
@@ -74,7 +97,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 			{},
 			function(value, responseHeaders) {
 				checkServiceError(value);
-				$location.path('/projects'); // ATENCAO
+				$location.path('/projects/dashboard'); // ATENCAO
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -89,7 +112,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 			$scope.item, 
 			function(value, responseHeaders) {
 				checkServiceError(value);
-				$location.path('/projects'); // ATENCAO
+				$location.path('/projects/dashboard'); // ATENCAO
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -103,7 +126,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 			{},
 			function(value, responseHeaders) {
 				checkServiceError(value);
-				$location.path('/projects'); // ATENCAO
+				$location.path('/projects/dashboard'); // ATENCAO
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -132,7 +155,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
     	$scope.allPaginate(pageNumber);
     }
 
-    getResultsPage(1);
+    //getResultsPage(1);
 
 	//---------------------------------------------
 	// Datepicker:
@@ -156,7 +179,7 @@ function($scope, $location, $cookies, $routeParams, appConfig, Project, Client) 
 	};
 
 	$scope.getClients = function(name) {
-		return Client.query({
+		return Client2.query({
 			search: name,
 			searchFields: 'name:like'
 		}).$promise;

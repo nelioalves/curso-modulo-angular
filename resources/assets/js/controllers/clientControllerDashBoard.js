@@ -1,5 +1,5 @@
 angular.module('app.controllers')
-.controller('ClientController', 
+.controller('ClientControllerDashBoard', 
 ['$scope', '$location', '$routeParams', 'Client', 
 function($scope, $location, $routeParams, Client) {
 
@@ -19,8 +19,8 @@ function($scope, $location, $routeParams, Client) {
 	    Client.query(
 	    	{
 	    		page: pageNumber,
-				orderBy: 'name',
-				sortedBy: 'asc',
+				orderBy: 'created_at',
+				sortedBy: 'desc',
 				limit: $scope.itemsPerPage	    	
 			}, // ATENCAO
 			function(value, responseHeaders) {
@@ -80,7 +80,7 @@ function($scope, $location, $routeParams, Client) {
 			{},
 			function(value, responseHeaders) {
                 checkServiceError(value);
-               	$location.path('/clients/dashboard');
+               	$location.path('/clients');
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -95,7 +95,7 @@ function($scope, $location, $routeParams, Client) {
 			$scope.item, 
 			function(value, responseHeaders) {
                 checkServiceError(value);
-               	$location.path('/clients/dashboard');
+               	$location.path('/clients');
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);
@@ -109,7 +109,7 @@ function($scope, $location, $routeParams, Client) {
 			{},
 			function(value, responseHeaders) {
                 checkServiceError(value);
-               	$location.path('/clients/dashboard');
+               	$location.path('/clients');
 			},
 			function(httpResponse) {
 				alert("Erro "+httpResponse.status+": "+httpResponse.statusText);

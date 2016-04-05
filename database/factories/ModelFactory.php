@@ -51,7 +51,7 @@ $factory->define(CodeProject\Entities\ProjectTask::class, function (Faker\Genera
         'project_id' => rand(1,10),
         'start_date' => DateTime::createFromFormat('d/m/Y', (rand(1,28)."/".rand(1,12)."/".rand(2014,2015))),
         'due_date' => DateTime::createFromFormat('d/m/Y', (rand(1,28)."/".rand(1,12)."/".rand(2016,2016))),
-        'status' => rand(1,3),
+        'status' => rand(1,2),
     ];
 });
 

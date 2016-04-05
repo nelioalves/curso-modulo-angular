@@ -32,7 +32,7 @@
 							<label class="col-md-4 control-label">Client</label>
 							<div class="col-md-6">
 
-								<input class="form-control" type="text" name="client_id" ng-model="item.client.data" uib-typeahead="o as o.name for o in getClients($viewValue) | limitTo:8"  typeahead-input-formatter="formatName($model)" typeahead-on-select="selectClient($item)" typeahead-editable="false" required />
+								<input class="form-control" type="text" name="client_id" ng-model="item.client.data" uib-typeahead="o as o.name for o in getClients($viewValue) | limitTo:8"  typeahead-input-formatter="formatName($model)" typeahead-on-select="selectClient($item)" typeahead-editable="false" required autocomplete="off" />
 																
 								<!--
 								<select class="form-control" name="client_id" ng-model="item.client_id" ng-options="o.id as o.name for o in clients" required>

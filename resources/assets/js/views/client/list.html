@@ -7,7 +7,7 @@
 
 					<a ng-href="#/clients/new" class="btn btn-primary">Inserir novo</a>
 
-					<table class="table" ng-init="all()">
+					<table class="table" ng-init="allPaginate(1)">
 						<thead>
 						<tr>
 							<th>Id</th>
@@ -19,7 +19,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<tr ng-repeat="o in items">
+						<tr dir-paginate="o in items | itemsPerPage: itemsPerPage" total-items="itemsTotal" current-page="pagination.current">
 							<td>
 								<a ng-href="#/clients/{{o.id}}">{{o.id}}</a>
 							</td>
@@ -34,6 +34,7 @@
 						</tr>
 						</tbody>
 					</table>
+					<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 				</div>
 			</div>
 		</div>

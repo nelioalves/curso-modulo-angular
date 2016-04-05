@@ -4,7 +4,7 @@ var app = angular.module('app', [
   'ngAnimate', 'ui.bootstrap.tpls', 'ui.bootstrap.typeahead', 
   'ui.bootstrap.datepicker', 'ui.bootstrap.modal',
   'ngFileUpload', 'http-auth-interceptor', 'angularUtils.directives.dirPagination',
-  'mgcrea.ngStrap.navbar', 'ui.bootstrap.dropdown'
+  'mgcrea.ngStrap.navbar', 'ui.bootstrap.dropdown', 'ui.bootstrap.tabs'
 ]);
 
 angular.module('app.controllers', ['ngMessages','angular-oauth2']);
@@ -162,6 +162,11 @@ app.config([
       })
       .when('/projects', {
           templateUrl: 'build/views/project/list.html',
+          controller: 'ProjectController',
+          title: 'Projetos'
+      })
+      .when('/projects/dashboard', {
+          templateUrl: 'build/views/project/dashboard.html',
           controller: 'ProjectController',
           title: 'Projetos'
       })

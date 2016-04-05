@@ -21,6 +21,10 @@ class ClientController extends Controller
         return $this->service->all($limit);
     }
 
+    public function indexNoPaginate() {
+        return $this->service->allNoPaginate();
+    }
+
     public function store(Request $request) {
         return $this->service->create($request->all());
     }
