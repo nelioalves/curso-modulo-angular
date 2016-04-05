@@ -4,7 +4,7 @@ angular.module('app.controllers')
 function($scope, $location, $routeParams, Client) {
 
 	$scope.cancel = function() {
-		$location.path('/clients');
+		$location.path('/clients/dashboard');
 	};
 
 	$scope.new = function() {

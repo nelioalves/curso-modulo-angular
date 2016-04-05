@@ -40,8 +40,8 @@ $factory->define(CodeProject\Entities\Project::class, function (Faker\Generator 
         'name' => $faker->word,
         'description' => $faker->sentence,
         'progress' => rand(1,100),
-        'status' => rand(1,3),
-        'due_date' => DateTime::createFromFormat('d/m/Y', (rand(1,28)."/".rand(1,12)."/".rand(2010,2013))),
+        'status' => rand(2,2),
+        'due_date' => DateTime::createFromFormat('d/m/Y', (rand(1,28)."/".rand(1,12)."/".rand(2014,2017))),
     ];
 });
 

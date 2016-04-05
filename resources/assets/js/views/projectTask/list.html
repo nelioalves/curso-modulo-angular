@@ -44,7 +44,7 @@
 							<td>{{o.name}}</td>
 							<td>{{o.start_date | dateBr}}</td>
 							<td>{{o.due_date | dateBr}}</td>
-							<td>{{o.status}}</td>
+							<td>{{o.status | statusTask}}</td>
 							<td>
 								<a ng-href="#/project/{{father_id}}/tasks/{{o.id}}/edit" class="btn btn-primary btn-xs">Editar</a>
 								<a ng-href="#/project/{{father_id}}/tasks/{{o.id}}/remove" class="btn btn-danger btn-xs">Excluir</a>
