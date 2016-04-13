@@ -69,6 +69,12 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
         })->paginate($limit, $columns);
     }
 
+    public function findMember($ids, $limit=null, $columns = array()) {
+        return $this->scopeQuery(function($query) use ($ids) {
+            return $query->select('projects.*')->whereIn('id', $ids);
+        })->paginate($limit, $columns);
+    }
+
     public function presenter() {
         return \CodeProject\Presenters\ProjectPresenter::class;
     }

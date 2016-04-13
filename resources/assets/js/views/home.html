@@ -1,1 +1,168 @@
-<h1>Página inicial</h1>
+<section class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-9">
+                <header class="header-internal">
+                    <div class="row row-xs">
+                        <div class="col-xs-8">
+                            <h2 class="h4 page-title line-after">
+                                <span>Projetos</span>
+                            </h2>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="tools">
+                                <div class="btn btn-default btn-sm" ng-click="inserir()">
+                                    <i class="fa fa-plus"></i> Projeto
+                                </div>
+                            </div> <!-- /tools -->
+                        </div>
+                    </div>
+                </header> <!-- /header-internal -->
+
+                <div class="row" ng-init="allPaginate(1)">
+                    <div ng-class="disp(4)" class="boxed-manager-menu-nav-item" dir-paginate="o in items | itemsPerPage: itemsPerPage" total-items="itemsTotal" current-page="pagination.current">
+                        <div class="panel panel-default panel-stacked">
+                            <div class="panel-heading bg-white no-border-bottom text-boulder">
+                                <h3 class="h4 text-boulder">{{o.name}}</h3>
+                                <small class="text-upper text-silver">{{o.client.data.name}}</small>
+                            </div> <!-- /panel-heading bg-white -->
+                            <div class="panel-body">
+                                <ul class="list-unstyled list-padding text-boulder">
+                                    <li class="clearfix">
+                                        Progresso:
+
+                                        <div class="radial-progress radial-progress-xs radial-progress-warning progresso-inline pull-right" data-progress="{{o.progress}}">
+                                            <div class="circle">
+                                                <div class="mask full">
+                                                    <div class="fill"></div>
+                                                </div>
+                                                <div class="mask half">
+                                                    <div class="fill"></div>
+                                                    <div class="fill fix"></div>
+                                                </div>
+                                                <div class="shadow"></div>
+                                            </div>
+                                            <div class="inset">
+                                                <div class="percentage">
+                                                    <div class="numbers">{{o.progress}}%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        Progresso esperado:
+
+                                        <div class="radial-progress radial-progress-xs radial-progress-warning progresso-inline pull-right" data-progress="{{o.progress_expected}}">
+                                            <div class="circle">
+                                                <div class="mask full">
+                                                    <div class="fill"></div>
+                                                </div>
+                                                <div class="mask half">
+                                                    <div class="fill"></div>
+                                                    <div class="fill fix"></div>
+                                                </div>
+                                                <div class="shadow"></div>
+                                            </div>
+                                            <div class="inset">
+                                                <div class="percentage">
+                                                    <div class="numbers">{{o.progress_expected}}%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        Entrega: <span class="pull-right text-orange">{{o.due_date | dateBr}}</span>
+                                    </li>
+                                </ul> <!-- /panel-list-unstyled -->
+                            </div> <!-- /panel-body -->
+                            <div class="panel-footer panel-footer-xs no-border-top sazerac text-info font-bold">
+                                <p ng-class="corAlerta(o)"><i class="fa fa-circle"></i> {{o | statusProjeto}}
+                                <span class="pull-right">{{o.days}}</span></p>
+                            </div> <!-- /panel-footer panel-footer-xs sazerac -->
+                        </div> <!-- /panel.panel-default -->
+                    </div>
+                </div>
+                <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+            </div>
+            <div class="col-xs-3">
+                <h5>Últimas atualizações</h5>
+
+                <br/>
+                <div class="mini-timeline">
+                    <div class="list-item list-item-stacked text-boulder">
+                        <div class="clearfix">
+                            <img src="build/images/avatar.png" alt="" class="avatar-sm rounded"/>
+                            <p>
+                                <strong>Mudança de status em um projeto</strong>
+                                <br/>
+                                <small>há alguns segundos</small>
+                                <br/>
+                                <span class="text-info">O status no novo site foi alterado para vencido</span>
+                            </p>
+                        </div>
+                    </div> <!-- /list-item -->
+                    <div class="list-item list-item-stacked text-boulder">
+                        <div class="clearfix">
+                            <img src="build/images/avatar.png" alt="" class="avatar-sm rounded"/>
+                            <p>
+                                <strong>Mudança de status em um projeto</strong>
+                                <br/>
+                                <small>há alguns segundos</small>
+                                <br/>
+                                <span class="text-info">O status no novo site foi alterado para vencido</span>
+                            </p>
+                        </div>
+                    </div> <!-- /list-item -->
+                    <div class="list-item list-item-stacked text-boulder">
+                        <div class="clearfix">
+                            <img src="build/images/avatar.png" alt="" class="avatar-sm rounded"/>
+                            <p>
+                                <strong>Mudança de status em um projeto</strong>
+                                <br/>
+                                <small>há alguns segundos</small>
+                                <br/>
+                                <span class="text-info">O status no novo site foi alterado para vencido</span>
+                            </p>
+                        </div>
+                    </div> <!-- /list-item -->
+                    <div class="list-item list-item-stacked text-boulder">
+                        <div class="clearfix">
+                            <img src="build/images/avatar.png" alt="" class="avatar-sm rounded"/>
+                            <p>
+                                <strong>Mudança de status em um projeto</strong>
+                                <br/>
+                                <small>há alguns segundos</small>
+                                <br/>
+                                <span class="text-info">O status no novo site foi alterado para vencido</span>
+                            </p>
+                        </div>
+                    </div> <!-- /list-item -->
+                    <div class="list-item list-item-stacked text-boulder">
+                        <div class="clearfix">
+                            <img src="build/images/avatar.png" alt="" class="avatar-sm rounded"/>
+                            <p>
+                                <strong>Mudança de status em um projeto</strong>
+                                <br/>
+                                <small>há alguns segundos</small>
+                                <br/>
+                                <span class="text-info">O status no novo site foi alterado para vencido</span>
+                            </p>
+                        </div>
+                    </div> <!-- /list-item -->
+                    <div class="list-item list-item-stacked text-boulder">
+                        <div class="clearfix">
+                            <img src="build/images/avatar.png" alt="" class="avatar-sm rounded"/>
+                            <p>
+                                <strong>Mudança de status em um projeto</strong>
+                                <br/>
+                                <small>há alguns segundos</small>
+                                <br/>
+                                <span class="text-info">O status no novo site foi alterado para vencido</span>
+                            </p>
+                        </div>
+                    </div> <!-- /list-item -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -27,6 +27,8 @@ class ProjectTransformer extends TransformerAbstract {
 			'is_member' => $project->owner_id != \Authorizer::getResourceOwnerId(),
 			'tasks_count' => $tasks->count(),
 			'tasks_opened' => $this->countTasksOpened($tasks),
+			'progress_expected' => $this->progressExpected($project),
+			'days' =>  $this->daysToFinish($project),
 		];
 	}
 
@@ -62,5 +64,42 @@ class ProjectTransformer extends TransformerAbstract {
 			}
 		}
 		return $count;
+	}
+
+	function countExpected($tasks) {
+		$count = 0;
+		foreach ($tasks as $task) {
+			if (!is_null($task->due_date) && $task->due_date <= date('Y-m-d')) {
+				$count++;
+			}
+		}
+		return $count;
+	}
+
+	function daysToFinish($project) {
+		if ($project->status == 3) {
+			return 0;
+		}
+
+		$end = new \DateTime($project->due_date);
+		$now = new \DateTime(date('Y-m-d'));
+
+		if ($end < $now) {
+			return -$now->diff($end)->days;
+		}
+		else {
+	    	return $now->diff($end)->days;
+	    }
+	}
+
+	function progressExpected($project) { 
+		$all = $project->tasks->count();
+		$expected = $this->countExpected($project->tasks);
+		if ($all == 0) {
+			return 0;
+		}
+		else {
+			return number_format($expected / $all * 100, 0, '.', '');
+		}
 	}
 }

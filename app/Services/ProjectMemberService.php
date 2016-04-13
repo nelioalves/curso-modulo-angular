@@ -63,9 +63,18 @@ class ProjectMemberService {
     }
 
     public function delete($id) {
-        if (is_null(ProjectMember::find($id))) {
+        $pm = ProjectMember::find($id);
+        if (is_null($pm)) {
             return Errors::invalidId($id);
         }
+
+        // Lembrete: a verificacao se o usuario autenticado eh o dono do projeto ja foi
+        // feita via middleware. Basta agora testar se o membro nao eh o usuario autenticado
+        $user_id = \Authorizer::getResourceOwnerId();
+        if ($user_id == $pm->user_id) {
+            return Errors::basic("Voce eh dono do projeto e portanto nao pode se excluir dele");
+        }
+
         $this->repository->delete($id);
         return ['message' => "Registro deletado!"];    
     }

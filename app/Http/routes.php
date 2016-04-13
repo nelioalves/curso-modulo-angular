@@ -84,7 +84,7 @@ Route::group(['middleware'=>'oauth'], function() {
 
 	// Rotas relacionadas a Project
 
-	Route::get('project', 'ProjectController@index');
+	Route::get('project', 'ProjectController@indexMember');
 	Route::post('project', 'ProjectController@store');
 
 	Route::group(['middleware'=>'check-project-member'], function() {

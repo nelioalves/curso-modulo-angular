@@ -56,6 +56,27 @@
                                         {{item.description}}
                                     </div>
                                 </uib-tab>
+                                <uib-tab index="1" heading="Membros">
+                                    <div class="row section-padd">
+                                        <div class="btn-group pull-left ">
+                                            <a ng-href="#/project/{{item.id}}/members" class="btn btn-primary btn-sm text-upper">
+                                                <small>Gerenciar</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row section-padd">
+                                        <div class="task-list">
+                                            <h6 class="task-list-title">Membros:</h6>
+                                            <ul class="task-list-body">
+                                                <li ng-repeat="o in item.members.data">
+                                                    <label>
+                                                        {{o.name}}
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </uib-tab>
                                 <uib-tab index="1" heading="Tarefas">
                                     <div class="row section-padd">
                                         <div class="btn-group pull-left ">
@@ -96,7 +117,7 @@
                                         <div class="files-list-blocks">
 
                                             <div ng-repeat="o in item.files.data">
-                                                <img src="build/images/icons/ico-{{o.extension}}.png" />
+                                                <img ng-src="build/images/icons/ico-{{o.extension}}.png" />
                                                 <project-file-download id-project="{{o.project_id}}" id-file="{{o.id}}">
                                                 </project-file-download>
                                                 {{o.name}}: {{o.description}}
